@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Santiago',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,12 +171,16 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        CornerStudio\Providers\AppServiceProvider::class,
+        CornerStudio\Providers\AuthServiceProvider::class,
+        // CornerStudio\Providers\BroadcastServiceProvider::class,
+        CornerStudio\Providers\EventServiceProvider::class,
+        CornerStudio\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Service Providers
+         */
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -226,6 +230,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Custom Aliases
+         */
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
-
 ];
