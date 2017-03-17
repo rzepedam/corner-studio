@@ -12,6 +12,5 @@ class ClientTableSeeder extends Seeder
     public function run()
     {
         DB::table('clients')->truncate();
-        factory(\CornerStudio\Http\Entities\Client::class, 50)->create();
     }
 }

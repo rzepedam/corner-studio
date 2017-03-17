@@ -3,7 +3,6 @@
 namespace CornerStudio\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use CornerStudio\Http\Entities\Plan;
 use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Payment;
 use CornerStudio\Http\Entities\Subscription;
@@ -21,11 +20,6 @@ class SubscriptionController extends Controller
     protected $payment;
 
     /**
-     * @var Plan
-     */
-    protected $plan;
-
-    /**
      * @var Subscription
      */
     protected $subscription;
@@ -34,14 +28,12 @@ class SubscriptionController extends Controller
      * SubscriptionController constructor.
      * @param Client $client
      * @param Payment $payment
-     * @param Plan $plan
      * @param Subscription $subscription
      */
-    public function __construct(Client $client, Payment $payment, Plan $plan, Subscription $subscription)
+    public function __construct(Client $client, Payment $payment, Subscription $subscription)
     {
         $this->client       = $client;
         $this->payment      = $payment;
-        $this->plan         = $plan;
         $this->subscription = $subscription;
     }
 
@@ -66,9 +58,8 @@ class SubscriptionController extends Controller
     {
         $clients  = $this->client->pluck('full_name', 'id');
         $payments = $this->payment->pluck('name', 'id');
-        $plans    = $this->plan->pluck('name', 'id');
 
-        return view('subscriptions.create', compact('clients', 'payments', 'plans'));
+        return view('subscriptions.create', compact('clients', 'payments'));
     }
 
     /**
@@ -78,13 +69,14 @@ class SubscriptionController extends Controller
      */
     public function store()
     {
+        request()->request->add(['start_date' => '']);
         DB::beginTransaction();
         try
         {
             $this->subscription->create(request()->all());
             DB::commit();
 
-            return response()->json(['status' => true]);
+            return response()->json(['status' => true, 'url' => '/subscriptions' ]);
         } catch ( Exception $e )
         {
             $this->log->error("Error Store Subscription: " . $e->getMessage());
@@ -102,7 +94,9 @@ class SubscriptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $subscription = $this->subscription->findOrFail($id);
+
+        return view('subscriptions.show', compact('subscription'));
     }
 
     /**

@@ -43,20 +43,26 @@
         {{ Form::label('marital_status_id', 'Estado Civil') }}
         {{ Form::select('marital_status_id', $maritalStatuses, null, ['class' => 'form-control']) }}
     </div>
+    {{-- Nacionalidad select field --}}
+    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    	{{ Form::label('country_id', 'Nacionalidad') }}
+    	{{ Form::select('country_id', $countries, null, ['class' => 'form-control']) }}
+    </div>
     {{-- Sexo radio field --}}
     <div class="col-xs-12 col-sm-4 col-md-3 form-group margin-0">
     	{{ Form::label('is_male', 'Sexo') }}
     	<ul class="list-unstyled list-inline text-center">
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	        	<input type="radio" id="male" name="is_male" value="0" />
+    	        	<input type="radio" id="male" name="is_male" value="1" />
     	            <label for="male">Masculino</label>
     	        </div>
     	    </li>
     	    <li></li>
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	            <input type="radio" id="female" name="is_male" value="1" />
+    	            <input type="radio" id="female" name="is_male" value="0tf can_formatted_birthday_client
+" />
     	            <label for="female">Femenino</label>
     	        </div>
     	    </li>

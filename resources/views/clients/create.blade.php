@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title') Crear Nueva Suscripción @stop
+@section('title') Crear Nuevo Cliente @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('clients.index') }}">Clientes</a></li>

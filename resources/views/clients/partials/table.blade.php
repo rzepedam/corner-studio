@@ -3,20 +3,20 @@
         <tr>
             <th>#</th>
             <th>Cliente</th>
-            <th class="text-center">Estado</th>
+            <th>Rut</th>
+            <th class="text-center">Email</th>
             <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($subscriptions as $subscription)
+        @foreach($clients as $client)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $subscription->client->rut }}</td>
+                <td>{{ $client->male_surname . ' ' . $client->first_name }}</td>
+                <td>{{ $client->rut }}</td>
+                <td class="text-center">{{ $client->email }}</td>
                 <td class="text-center">
-                    <span class="badge badge-primary">Vigente</span>
-                </td>
-                <td class="text-center">
-                    <a href="{{ route('subscriptions.show', $subscription) }}">
+                    <a href="{{ route('clients.show', $client) }}">
                         <i class="mdi mdi-magnify mdi-18px text-info"></i>
                     </a>
                     <a href="javascript:void(0)">

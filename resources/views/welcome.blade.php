@@ -1,3 +1,7 @@
 @extends('layouts.layout')
 
-<h3> Home </h3>
+@section('content')
+
+    <h3> Home </h3>
+
+@stop

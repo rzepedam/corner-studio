@@ -42,11 +42,6 @@
                 <i class="mdi mdi-wallet-membership" aria-hidden="true"></i> <span class="nav-label">Suscripciones</span>
             </a>
         </li>
-        <li class="{{ Request::is('plans') ? 'active' : '' }}">
-            <a href="{{ route('plans.index') }}">
-                <i class="mdi mdi-tag-text-outline" aria-hidden="true"></i> <span class="nav-label">Planes</span>
-            </a>
-        </li>
         <li class="{{ Request::is('incomes') ? 'active' : '' }}">
             <a href="javascript:void(0)">
                 <i class="mdi mdi-chart-areaspline" aria-hidden="true"></i> <span class="nav-label">Ingresos</span>

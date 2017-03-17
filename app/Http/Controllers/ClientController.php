@@ -2,10 +2,12 @@
 
 namespace CornerStudio\Http\Controllers;
 
-use CornerStudio\Http\Entities\MaritalStatus;
-use CornerStudio\Http\Entities\Region;
-use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
+use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Client;
+use CornerStudio\Http\Entities\Region;
+use CornerStudio\Http\Entities\Country;
+use CornerStudio\Http\Entities\MaritalStatus;
 
 class ClientController extends Controller
 {
@@ -13,6 +15,16 @@ class ClientController extends Controller
      * @var Client
      */
     protected $client;
+
+    /**
+     * @var Country
+     */
+    protected $country;
+
+    /**
+     * @var Log
+     */
+    protected $log;
 
     /**
      * @var MaritalStatus
@@ -27,12 +39,16 @@ class ClientController extends Controller
     /**
      * ClientController constructor.
      * @param Client $client
+     * @param Country $country
+     * @param Log $log
      * @param MaritalStatus $maritalStatus
      * @param Region $region
      */
-    public function __construct(Client $client, MaritalStatus $maritalStatus, Region $region)
+    public function __construct(Client $client, Country $country, Log $log, MaritalStatus $maritalStatus, Region $region)
     {
         $this->client        = $client;
+        $this->country       = $country;
+        $this->log           = $log;
         $this->maritalStatus = $maritalStatus;
         $this->region        = $region;
     }
@@ -58,19 +74,35 @@ class ClientController extends Controller
     {
         $maritalStatuses = $this->maritalStatus->pluck('name', 'id');
         $regions         = $this->region->pluck('name', 'id');
+        $countries       = $this->country->pluck('name', 'id');
 
-        return view('clients.create', compact('maritalStatuses', 'regions'));
+        return view('clients.create', compact('countries', 'maritalStatuses', 'regions'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        request()->request->add(['full_name' => null]);
+        DB::beginTransaction();
+
+        try
+        {
+            $client = $this->client->create(request()->all());
+            $client->address()->create(request()->all());
+            DB::commit();
+
+            return response()->json(['status' => true, 'url' => '/clients']);
+        } catch ( Exception $e )
+        {
+            $this->log->error("Error Store Client: " . $e->getMessage());
+            DB::rollBack();
+
+            return response()->json(['status' => false]);
+        }
     }
 
     /**
@@ -81,7 +113,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = $this->client->findOrFail($id);
+
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -98,11 +132,10 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
     }

@@ -16,6 +16,7 @@ mix
     .combine([
         'resources/assets/inspinia/css/bootstrap.min.css',
         'node_modules/mdi/css/materialdesignicons.min.css',
+        'resources/assets/custom/css/font-awesome.min.css',
         'resources/assets/inspinia/css/toastr.min.css',
         'resources/assets/inspinia/css/animate.css',
         'resources/assets/inspinia/css/style.css',
@@ -34,6 +35,7 @@ mix
     ], 'public/js/layout.js')
 
     .copy('node_modules/mdi/fonts', 'public/fonts')
+    .copy('resources/assets/custom/fonts', 'public/fonts')
 
     .copy([
         'resources/assets/inspinia/img/a4.jpg',

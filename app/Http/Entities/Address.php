@@ -17,4 +17,30 @@ class Address extends Model
      * @var bool
      */
     public $timestamps = false;
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
+    }
+
+
+    /**
+     * @return string 'Palacio Riesco 3819, Pozo Almonte. Región de Tarapacá'
+     */
+    public function getAddressAttribute($value)
+    {
+        return $value . ', ' . $this->commune->name . '. ' . $this->commune->province->region->name;
+    }
 }

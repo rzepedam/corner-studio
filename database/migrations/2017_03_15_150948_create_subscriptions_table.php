@@ -17,11 +17,10 @@ class CreateSubscriptionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedInteger('payment_id')->nullable();
-            $table->unsignedInteger('plan_id')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('num_voucher');
-            $table->date('payday');
+            $table->string('payday');
             $table->timestamps();
         });
     }
