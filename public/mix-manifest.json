@@ -2,5 +2,9 @@
   "/mix.js": "/mix.js",
   "/css/layout.css": "/css/layout.css",
   "/js/layout.js": "/js/layout.js",
-  "/js/create-edit-common.js": "/js/create-edit-common.js"
+  "/js/create-edit-common.js": "/js/create-edit-common.js",
+  "/css/create-custom-activity.css": "/css/create-custom-activity.css",
+  "/js/create-custom-activity.js": "/js/create-custom-activity.js",
+  "/css/create-custom-subscription.css": "/css/create-custom-subscription.css",
+  "/js/create-custom-subscription.js": "/js/create-custom-subscription.js"
 }

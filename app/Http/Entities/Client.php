@@ -30,7 +30,7 @@ class Client extends Model
      */
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->morphOne(Address::class, 'addressable');
     }
 
     /**
@@ -111,7 +111,7 @@ class Client extends Model
      */
     public function getIsMaleAttribute($value)
     {
-        return ($value === 1) ? 'Masculino' : 'Femenino';
+        return $value ? 'Masculino' : 'Femenino';
     }
 
 }

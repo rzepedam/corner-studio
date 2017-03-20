@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <td>Fecha Inicio</td>
-                                <td class="text-capitalize text-center">{{ $subscription->start_date }}</td>
+                                <td class="text-capitalize text-center">{{ $subscription->created_at }}</td>
                             </tr>
                             <tr>
                                 <td>Fecha Término</td>
@@ -39,6 +39,17 @@
                             <tr>
                                 <td>Día Pago</td>
                                 <td class="text-center">{{ $subscription->payday }}</td>
+                            </tr>
+                            <tr>
+                                <td>Actividades Suscritas</td>
+                                <td class="text-center">
+                                    @foreach($subscription->activities as $activity)
+                                        <?php $random = array_rand(config('constants.colors'), 1); ?>
+                                        <span class="badge badge-{{ $random }}">
+                                            <a href="{{ url('activities/' . $activity->id) }}">{{ $activity->name }}</a>
+                                        </span>
+                                    @endforeach
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -12,18 +12,36 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(CornerStudio\Http\Entities\Address::class, function (Faker\Generator $faker)
+use Carbon\Carbon;
+
+$factory->define(CornerStudio\Http\Entities\Activity::class, function (Faker\Generator $faker)
 {
-    $communes = \CornerStudio\Http\Entities\Commune::all();
+    $randomStart = mt_rand(Carbon::now()->timestamp, Carbon::parse('+1 month')->timestamp);
+    $randomEnd   = mt_rand(Carbon::parse('+2 months')->timestamp, Carbon::parse('+12 months')->timestamp);
 
     return [
-        'client_id'  => factory(\CornerStudio\Http\Entities\Client::class)->create()->id,
-        'commune_id' => $communes->random()->id,
-        'address'    => $faker->address,
-        'depto'      => '',
-        'block'      => '',
-        'phone1'     => $faker->e164PhoneNumber,
-        'phone2'     => $faker->e164PhoneNumber
+        'professional_id' => rand(1, 25),
+        'name'            => $faker->sentence($nbWords = 2),
+        'amount'          => $faker->numberBetween(9990, 29990),
+        'start_date'      => Carbon::createFromFormat('U', $randomStart),
+        'end_date'        => Carbon::createFromFormat('U', $randomEnd)
+    ];
+});
+
+$factory->define(CornerStudio\Http\Entities\Address::class, function (Faker\Generator $faker)
+{
+    return [
+        'addressable_id'   => function ()
+        {
+            return factory(\CornerStudio\Http\Entities\Client::class)->create()->id;
+        },
+        'addressable_type' => 'CornerStudio\Http\Entities\Client',
+        'commune_id'       => factory(\CornerStudio\Http\Entities\Commune::class)->create()->id,
+        'address'          => $faker->address,
+        'depto'            => '',
+        'block'            => '',
+        'phone1'           => $faker->e164PhoneNumber,
+        'phone2'           => $faker->e164PhoneNumber
     ];
 });
 
@@ -78,6 +96,36 @@ $factory->define(CornerStudio\Http\Entities\Payment::class, function (Faker\Gene
     ];
 });
 
+$factory->define(CornerStudio\Http\Entities\Position::class, function (Faker\Generator $faker)
+{
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(CornerStudio\Http\Entities\Professional::class, function (Faker\Generator $faker)
+{
+    $maleSurname   = $faker->lastName;
+    $femaleSurname = $faker->lastName;
+    $firstName     = $faker->firstName;
+    $secondName    = $faker->firstName;
+
+    return [
+        'position_id'       => factory(\CornerStudio\Http\Entities\Position::class)->create()->id,
+        'country_id'        => rand(1, 9),
+        'marital_status_id' => rand(1, 4),
+        'male_surname'      => $maleSurname,
+        'female_surname'    => $femaleSurname,
+        'first_name'        => $firstName,
+        'second_name'       => $secondName,
+        'full_name'         => "$firstName $secondName $maleSurname $femaleSurname",
+        'rut'               => rand(3, 24) . '.' . rand(100, 999) . '.' . rand(100, 999) . '-' . rand(1, 9),
+        'birthday'          => $faker->date($format = 'd-m-Y', $max = 'now'),
+        'is_male'           => $faker->randomElement(['1', '2']),
+        'email'             => $faker->email
+    ];
+});
+
 $factory->define(CornerStudio\Http\Entities\Province::class, function (Faker\Generator $faker)
 {
     return [
@@ -95,14 +143,12 @@ $factory->define(CornerStudio\Http\Entities\Region::class, function (Faker\Gener
 
 $factory->define(CornerStudio\Http\Entities\Subscription::class, function (Faker\Generator $faker)
 {
-    $clients  = \CornerStudio\Http\Entities\Client::all();
-    $payments = \CornerStudio\Http\Entities\Payment::all();
+    $randomEnd = mt_rand(Carbon::parse('+10 days')->timestamp, Carbon::parse('+12 months')->timestamp);
 
     return [
-        'client_id'   => $clients->random()->id,
-        'payment_id'  => $payments->random()->id,
-        'start_date'  => $faker->date($format = 'd-m-Y', $min = 'now'),
-        'end_date'    => $faker->date($format = 'd-m-Y', $max = '+1 month'),
+        'client_id'   => factory(\CornerStudio\Http\Entities\Client::class)->create()->id,
+        'payment_id'  => factory(\CornerStudio\Http\Entities\Payment::class)->create()->id,
+        'end_date'    => Carbon::createFromFormat('U', $randomEnd)->format('d-m-Y'),
         'num_voucher' => $faker->numberBetween(100000, 999999),
         'payday'      => $faker->numberBetween(1, 30)
     ];

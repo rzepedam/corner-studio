@@ -10,7 +10,7 @@ class Address extends Model
      * @var array
      */
     protected $fillable   = [
-        'client_id', 'commune_id', 'address', 'depto', 'block', 'phone1', 'phone2'
+        'addressable_id', 'addressable_type', 'commune_id', 'address', 'depto', 'block', 'phone1', 'phone2'
     ];
 
     /**
@@ -18,6 +18,14 @@ class Address extends Model
      */
     public $timestamps = false;
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function addressable()
+    {
+        return $this->morphTo();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

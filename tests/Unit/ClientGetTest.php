@@ -24,41 +24,33 @@ class ClientGetTest extends TestCase
     /** @test */
     function can_display_rut_with_dash_and_points_client()
     {
-        $address = factory(Address::class)->create([
-            'client_id' => factory(Client::class)->create(['rut' => '7.533.818-k'])->id
-        ]);
+        $client = factory(Client::class)->create(['rut' => '7533818-k']);
 
-        $this->assertEquals('7.533.818-k', $address->client->rut);
+        $this->assertEquals('7.533.818-k', $client->rut);
     }
 
     /** @test */
     function can_display_birthday_with_l_j_F_Y_format_client()
     {
-        $address = factory(Address::class)->create([
-            'client_id' => factory(Client::class)->create(['birthday' => '20-07-1978'])->id
-        ]);
+        $client = factory(Client::class)->create(['birthday' => '20-07-1978']);
 
-        $this->assertEquals('jueves 20 julio 1978', $address->client->birthday);
+        $this->assertEquals('jueves 20 julio 1978', $client->birthday);
     }
 
     /** @test */
     function can_display_is_male_true_as_string_client()
     {
-        $address = factory(Address::class)->create([
-            'client_id' => factory(Client::class)->create(['is_male' => '1'])->id
-        ]);
+        $client = factory(Client::class)->create(['is_male' => '1']);
 
-        $this->assertEquals('Masculino', $address->client->is_male);
+        $this->assertEquals('Masculino', $client->is_male);
     }
 
     /** @test */
     function can_display_is_male_false_as_string_client()
     {
-        $address = factory(Address::class)->create([
-            'client_id' => factory(Client::class)->create(['is_male' => '0'])->id
-        ]);
+        $client = factory(Client::class)->create(['is_male' => '0']);
 
-        $this->assertEquals('Femenino', $address->client->is_male);
+        $this->assertEquals('Femenino', $client->is_male);
     }
 
     /** @test */
@@ -66,13 +58,13 @@ class ClientGetTest extends TestCase
     {
         $address = factory(Address::class)->create([
             'commune_id' => factory(Commune::class)->create([
-                'name' => 'Pozo Almonte',
+                'name'        => 'Pozo Almonte',
                 'province_id' => factory(Province::class)->create([
-                    'name' => 'El Tamarugal',
+                    'name'      => 'El Tamarugal',
                     'region_id' => factory(Region::class)->create(['name' => 'Región de Tarapacá'])->id
                 ])->id
             ])->id,
-            'address' => 'Palacio Riesco 3819'
+            'address'    => 'Palacio Riesco 3819'
         ]);
 
         $this->assertEquals('Palacio Riesco 3819, Pozo Almonte. Región de Tarapacá', $address->address);

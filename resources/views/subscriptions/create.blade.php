@@ -2,6 +2,12 @@
 
 @section('title') Crear Nueva Suscripción @stop
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ elixir('css/create-custom-subscription.css') }}">
+
+@stop
+
 @section('breadcrumb')
     <li><a href="{{ route('subscriptions.index') }}">Suscripciones</a></li>
     <li class="active"><strong>Nuevo</strong></li>
@@ -37,6 +43,24 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
+    <script type="text/javascript" src="{{ elixir('js/create-edit-common.js') }}"></script>
+    <script type="text/javascript" src="{{ elixir('js/create-custom-subscription.js') }}"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+            $('.input-group.date').datepicker("setDate", "+1m");
+            $('.input-group.date').datepicker("setStartDate", "{{ date('d-m-Y') }}");
+        });
+    </script>
 @stop

@@ -2,25 +2,23 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Cliente</th>
+            <th>Actividad</th>
+            <th>Profesional</th>
             <th class="text-center">Término</th>
-            <th class="text-center">Estado</th>
             <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($subscriptions as $subscription)
+        @foreach($activities as $activity)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $subscription->client->rut }}</td>
+                <td>{{ $activity->name }}</td>
+                <td>{{ $activity->professional->male_surname . ' ' . $activity->professional->first_name }}</td>
                 <td class="text-center">
-                    <span class="badge badge-danger">{{ $subscription->end_date_diff_in_days }}</span>
+                    <span class="badge badge-success">{{ $activity->end_date }}</span>
                 </td>
                 <td class="text-center">
-                    <span class="badge badge-primary">Vigente</span>
-                </td>
-                <td class="text-center">
-                    <a href="{{ route('subscriptions.show', $subscription) }}">
+                    <a href="{{ route('activities.show', $activity) }}">
                         <i class="mdi mdi-magnify mdi-18px text-info"></i>
                     </a>
                     <a href="javascript:void(0)">

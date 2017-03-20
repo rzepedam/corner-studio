@@ -11315,3 +11315,7 @@ body.md-skin {
 body {
     font-family: 'Open Sans', sans-serif;
 }
+
+.badge > a {
+    color: inherit;
+}

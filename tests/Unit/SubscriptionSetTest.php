@@ -17,17 +17,6 @@ class SubscriptionSetTest extends TestCase
     }
 
     /** @test */
-    function can_formatted_start_date_subscription()
-    {
-        factory(Subscription::class)->create(['start_date' => '']);
-        $now = Carbon::now()->format('Y-m-d');
-
-        $this->assertDatabaseHas('subscriptions', [
-            'start_date' => $now
-        ]);
-    }
-
-    /** @test */
     function can_formatted_end_date_subscription()
     {
         factory(Subscription::class)->create(['end_date' => '19-08-2017']);

@@ -5,21 +5,24 @@ namespace CornerStudio\Http\Entities;
 use Carbon\Carbon;
 use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Model;
+use CornerStudio\Traits\DatesTranslator;
 
 class Subscription extends Model
 {
+    use DatesTranslator;
+
     /**
      * @var array
      */
     protected $fillable = [
-        'client_id', 'payment_id', 'start_date', 'end_date', 'num_voucher', 'payday'
+        'client_id', 'payment_id', 'end_date', 'num_voucher', 'payday'
     ];
 
     /**
      * @var array
      */
     protected $dates = [
-        'start_date', 'end_date'
+        'end_date'
     ];
 
 
@@ -39,11 +42,14 @@ class Subscription extends Model
         return $this->belongsTo(Payment::class);
     }
 
-
-    public function setStartDateAttribute()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function activities()
     {
-        $this->attributes['start_date'] = Carbon::now()->format('Y-m-d');
+        return $this->belongsToMany(Activity::class);
     }
+
 
     /**
      * @param string $value '01-01-2010'
@@ -57,20 +63,22 @@ class Subscription extends Model
      * @param $value '1978-07-20'
      * @return string 'jueves 20 julio 1978'
      */
-    public function getStartDateAttribute($value)
-    {
-        return Date::parse($value)->format('l j F Y');
-    }
-
-    /**
-     * @param $value '1978-07-20'
-     * @return string 'jueves 20 julio 1978'
-     */
     public function getEndDateAttribute($value)
     {
         return Date::parse($value)->format('l j F Y');
     }
 
+    /**
+     * @return string '15 días'
+     */
+    public function getEndDateDiffInDaysAttribute()
+    {
+        return Carbon::parse($this->getOriginal('end_date'))->diffInDays() . ' días';
+    }
+
+    /**
+     * @return string 'Vigente or Caducado'
+     */
     public function getStateAttribute()
     {
         return ($this->getOriginal('end_date') > Carbon::now()->format('Y-m-d')) ? 'Vigente' : 'Caducado';

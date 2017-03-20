@@ -53,6 +53,19 @@ return [
             'engine' => null,
         ],
 
+        'mysql_tests' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE', 'forge').'_tests',
+            'username'  => env('MYSQL_USER', env('DB_USERNAME', 'forge')),
+            'password'  => env('MYSQL_PASSWORD', env('DB_PASSWORD', '')),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+            'timezone'  => '-03:00',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

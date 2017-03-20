@@ -5,10 +5,16 @@ namespace CornerStudio\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Payment;
+use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Subscription;
 
 class SubscriptionController extends Controller
 {
+    /**
+     * @var Activity
+     */
+    protected $activity;
+
     /**
      * @var Client
      */
@@ -26,12 +32,15 @@ class SubscriptionController extends Controller
 
     /**
      * SubscriptionController constructor.
+     *
+     * @param Activity $activity
      * @param Client $client
      * @param Payment $payment
      * @param Subscription $subscription
      */
-    public function __construct(Client $client, Payment $payment, Subscription $subscription)
+    public function __construct(Activity $activity, Client $client, Payment $payment, Subscription $subscription)
     {
+        $this->activity     = $activity;
         $this->client       = $client;
         $this->payment      = $payment;
         $this->subscription = $subscription;
@@ -44,7 +53,9 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = $this->subscription->all();
+        $subscriptions = $this->subscription->with(['client', 'payment', 'activities'])
+            ->orderBy('end_date')
+            ->get();
 
         return view('subscriptions.index', compact('subscriptions'));
     }
@@ -56,10 +67,11 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        $clients  = $this->client->pluck('full_name', 'id');
-        $payments = $this->payment->pluck('name', 'id');
+        $activities = $this->activity->pluck('name', 'id');
+        $clients    = $this->client->pluck('full_name', 'id');
+        $payments   = $this->payment->pluck('name', 'id');
 
-        return view('subscriptions.create', compact('clients', 'payments'));
+        return view('subscriptions.create', compact('activities', 'clients', 'payments'));
     }
 
     /**
@@ -69,14 +81,14 @@ class SubscriptionController extends Controller
      */
     public function store()
     {
-        request()->request->add(['start_date' => '']);
         DB::beginTransaction();
         try
         {
-            $this->subscription->create(request()->all());
+            $subscription = $this->subscription->create(request()->all());
+            $subscription->activities()->attach(request('activities'));
             DB::commit();
 
-            return response()->json(['status' => true, 'url' => '/subscriptions' ]);
+            return response()->json(['status' => true, 'url' => '/subscriptions']);
         } catch ( Exception $e )
         {
             $this->log->error("Error Store Subscription: " . $e->getMessage());
@@ -90,11 +102,12 @@ class SubscriptionController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $subscription = $this->subscription->findOrFail($id);
+        $subscription = $this->subscription->with(['activities'])->findOrFail($id);
 
         return view('subscriptions.show', compact('subscription'));
     }
@@ -103,6 +116,7 @@ class SubscriptionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,6 +129,7 @@ class SubscriptionController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -126,6 +141,7 @@ class SubscriptionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

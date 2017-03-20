@@ -6,3 +6,4 @@ Route::get('/', function () {
 
 Route::resource('clients', 'ClientController');
 Route::resource('subscriptions', 'SubscriptionController');
+Route::resource('activities', 'ActivityController');

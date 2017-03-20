@@ -12,7 +12,7 @@ const { mix } = require('laravel-mix');
  */
 
 mix
-    // Layout
+    // Layout CSS
     .combine([
         'resources/assets/inspinia/css/bootstrap.min.css',
         'node_modules/mdi/css/materialdesignicons.min.css',
@@ -23,6 +23,7 @@ mix
         'resources/assets/custom/css/custom-layout.css'
     ], 'public/css/layout.css')
 
+    // Layout JS
     .scripts([
         'resources/assets/inspinia/js/jquery-2.1.1.js',
         'resources/assets/inspinia/js/bootstrap.min.js',
@@ -34,6 +35,7 @@ mix
         'resources/assets/custom/js/custom-layout.js'
     ], 'public/js/layout.js')
 
+    // Files to copy
     .copy('node_modules/mdi/fonts', 'public/fonts')
     .copy('resources/assets/custom/fonts', 'public/fonts')
 
@@ -42,13 +44,40 @@ mix
         'resources/assets/inspinia/img/a7.jpg',
         'resources/assets/inspinia/img/profile.jpg',
         'resources/assets/inspinia/img/header-profile.png',
-        'resources/assets/inspinia/img/profile_small.jpg'
+        'resources/assets/inspinia/img/profile_small.jpg',
+        'resources/assets/inspinia/img/chosen-sprite.png',
+        'resources/assets/inspinia/img/chosen-sprite@2x.png'
     ], 'public/img')
 
 
     // Create Common
     .scripts([
         'resources/assets/corner-studio/utilities/submit-form.js'
-    ], 'public/js/create-edit-common.js');
+    ], 'public/js/create-edit-common.js')
+
+    // Create custom Activity
+    .combine([
+        'resources/assets/inspinia/css/datepicker3.css'
+    ], 'public/css/create-custom-activity.css')
+
+    .scripts([
+        'resources/assets/inspinia/js/bootstrap-datepicker.js',
+        'resources/assets/inspinia/js/bootstrap-datepicker.es.min.js',
+        'resources/assets/corner-studio/utilities/config-datepicker.js'
+    ], 'public/js/create-custom-activity.js')
+
+    // Create custom Subscription
+    .combine([
+        'resources/assets/inspinia/css/chosen.css',
+        'resources/assets/custom/css/chosen.css',
+        'resources/assets/inspinia/css/datepicker3.css'
+    ], 'public/css/create-custom-subscription.css')
+
+    .scripts([
+        'resources/assets/inspinia/js/chosen.jquery.js',
+        'resources/assets/inspinia/js/bootstrap-datepicker.js',
+        'resources/assets/inspinia/js/bootstrap-datepicker.es.min.js',
+        'resources/assets/corner-studio/utilities/config-datepicker.js'
+    ], 'public/js/create-custom-subscription.js');
 
 

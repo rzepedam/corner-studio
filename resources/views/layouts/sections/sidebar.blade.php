@@ -32,9 +32,9 @@
                 <i class="mdi mdi-worker" aria-hidden="true"></i> <span class="nav-label">Profesionales</span>
             </a>
         </li>
-        <li class="{{ Request::is('lessons') ? 'active' : '' }}">
-            <a href="javascript:void(0)">
-                <i class="mdi mdi-human-handsup" aria-hidden="true"></i> <span class="nav-label">Clases</span>
+        <li class="{{ Request::is('activities') ? 'active' : '' }}">
+            <a href="{{ route('activities.index') }}">
+                <i class="mdi mdi-bike" aria-hidden="true"></i> <span class="nav-label">Actividades</span>
             </a>
         </li>
         <li class="{{ Request::is('subscriptions') ? 'active' : '' }}">
