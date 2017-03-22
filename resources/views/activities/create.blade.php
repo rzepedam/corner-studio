@@ -53,6 +53,20 @@
             $('#startDate').datepicker("setStartDate", "{{ date('d-m-Y') }}");
             $('#endDate').datepicker("setDate", "+1m");
             $('#endDate').datepicker("setStartDate", "+1m");
+
+            $('.btn-custom-color').on('click', function()  {
+                if ($( this ).css( "background-color" ) === 'rgba(0, 0, 0, 0)' )
+                {
+                    $("#content-colors .btn-custom-color").each(function(index, element) {
+                        $(element).css('background', 'transparent');
+                    });
+                    $(this).css('background', $(this).attr('id'));
+                    $('#color').val($(this).attr('id'));
+                } else {
+                    $(this).css('background', 'transparent');
+                    $('#color').val('');
+                }
+            })
         });
 
     </script>

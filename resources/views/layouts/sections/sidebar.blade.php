@@ -22,6 +22,11 @@
                 CS+
             </div>
         </li>
+        <li class="{{ Request::is('/') ? 'active' : '' }}">
+            <a href="{{ route('home') }}">
+                <i class="mdi mdi-home" aria-hidden="true"></i> <span class="nav-label">Home</span>
+            </a>
+        </li>
         <li class="{{ Request::is('clients') ? 'active' : '' }}">
             <a href="{{ route('clients.index') }}">
                 <i class="mdi mdi-account-multiple" aria-hidden="true"></i> <span class="nav-label">Clientes</span>
@@ -40,6 +45,11 @@
         <li class="{{ Request::is('subscriptions') ? 'active' : '' }}">
             <a href="{{ route('subscriptions.index') }}">
                 <i class="mdi mdi-wallet-membership" aria-hidden="true"></i> <span class="nav-label">Suscripciones</span>
+            </a>
+        </li>
+        <li class="{{ Request::is('schedules') ? 'active' : '' }}">
+            <a href="{{ route('schedules.index') }}">
+                <i class="mdi mdi-calendar-text" aria-hidden="true"></i> <span class="nav-label">Calendario</span>
             </a>
         </li>
         <li class="{{ Request::is('incomes') ? 'active' : '' }}">

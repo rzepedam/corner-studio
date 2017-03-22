@@ -2,6 +2,7 @@
 
 namespace CornerStudio\Http\Controllers;
 
+use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Payment;
@@ -21,6 +22,11 @@ class SubscriptionController extends Controller
     protected $client;
 
     /**
+     * @var Log
+     */
+    protected $log;
+
+    /**
      * @var Payment
      */
     protected $payment;
@@ -35,13 +41,16 @@ class SubscriptionController extends Controller
      *
      * @param Activity $activity
      * @param Client $client
+     * @param Log $log
      * @param Payment $payment
      * @param Subscription $subscription
      */
-    public function __construct(Activity $activity, Client $client, Payment $payment, Subscription $subscription)
+    public function __construct(Activity $activity, Client $client, Log $log, Payment $payment,
+        Subscription $subscription)
     {
         $this->activity     = $activity;
         $this->client       = $client;
+        $this->log          = $log;
         $this->payment      = $payment;
         $this->subscription = $subscription;
     }

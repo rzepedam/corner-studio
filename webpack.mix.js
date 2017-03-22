@@ -70,7 +70,8 @@ mix
     .combine([
         'resources/assets/inspinia/css/chosen.css',
         'resources/assets/custom/css/chosen.css',
-        'resources/assets/inspinia/css/datepicker3.css'
+        'resources/assets/inspinia/css/datepicker3.css',
+        'resources/assets/inspinia/css/style.css'
     ], 'public/css/create-custom-subscription.css')
 
     .scripts([
@@ -78,6 +79,18 @@ mix
         'resources/assets/inspinia/js/bootstrap-datepicker.js',
         'resources/assets/inspinia/js/bootstrap-datepicker.es.min.js',
         'resources/assets/corner-studio/utilities/config-datepicker.js'
-    ], 'public/js/create-custom-subscription.js');
+    ], 'public/js/create-custom-subscription.js')
 
+    // Schedules
+    .combine([
+        'node_modules/fullcalendar/dist/fullcalendar.min.css',
+        'node_modules/sweetalert/dist/sweetalert.css'
+    ], 'public/css/schedules.css')
+
+    .scripts([
+        'node_modules/moment/moment.js',
+        'node_modules/fullcalendar/dist/fullcalendar.min.js',
+        'resources/assets/inspinia/js/fullcalendar.es.js',
+        'node_modules/sweetalert/dist/sweetalert.min.js'
+    ], 'public/js/schedules.js');
 

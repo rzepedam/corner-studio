@@ -6,5 +6,7 @@
   "/css/create-custom-activity.css": "/css/create-custom-activity.css",
   "/js/create-custom-activity.js": "/js/create-custom-activity.js",
   "/css/create-custom-subscription.css": "/css/create-custom-subscription.css",
-  "/js/create-custom-subscription.js": "/js/create-custom-subscription.js"
+  "/js/create-custom-subscription.js": "/js/create-custom-subscription.js",
+  "/css/schedules.css": "/css/schedules.css",
+  "/js/schedules.js": "/js/schedules.js"
 }

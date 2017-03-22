@@ -11,7 +11,7 @@ class Activity extends Model
      * @var array
      */
     protected $fillable = [
-        'professional_id', 'name', 'amount', 'start_date', 'end_date'
+        'professional_id', 'name', 'amount', 'start_date', 'end_date', 'color'
     ];
 
     /**
@@ -39,11 +39,19 @@ class Activity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    /**
      * @param string '01-01-2010'
      */
     public function setStartDateAttribute($value)
     {
-        $this->attributes['start_date'] = Carbon::parse($value);
+        $this->attributes['start_date'] = Carbon::parse($value)->format('Y-m-d H:i');
     }
 
     /**
@@ -51,7 +59,7 @@ class Activity extends Model
      */
     public function setEndDateAttribute($value)
     {
-        $this->attributes['end_date'] = Carbon::parse($value);
+        $this->attributes['end_date'] = Carbon::parse($value)->format('Y-m-d H:i');
     }
 
     /**

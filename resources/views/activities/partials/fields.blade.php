@@ -37,3 +37,13 @@
         </div>
     </div>
 </div>
+<div class="hr-line-dashed"></div>
+<div class="row">
+    <div id="content-colors" class="col-xs-12 col-sm-12 col-md-12 form-group">
+        {{ Form::hidden('color', '', ['id' => 'color']) }}
+        <h3>Color</h3>
+        @foreach($colors as $color)
+            <button id="{{ $color }}" class="btn btn-circle btn-outline btn-custom-color" style="border-color: {{ $color }}" type="button"></button>
+        @endforeach
+    </div>
+</div>

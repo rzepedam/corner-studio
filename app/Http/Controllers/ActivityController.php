@@ -2,7 +2,10 @@
 
 namespace CornerStudio\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Log\Writer as Log;
+use CornerStudio\Http\Entities\Color;
 use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Professional;
 
@@ -14,6 +17,16 @@ class ActivityController extends Controller
     protected $activity;
 
     /**
+     * @var Color
+     */
+    protected $color;
+
+    /**
+     * @var Log
+     */
+    protected $log;
+
+    /**
      * @var Professional
      */
     protected $professional;
@@ -22,11 +35,15 @@ class ActivityController extends Controller
      * ActivityController constructor.
      *
      * @param Activity $activity
+     * @param Color $color
+     * @param Log $log
      * @param Professional $professional
      */
-    public function __construct(Activity $activity, Professional $professional)
+    public function __construct(Activity $activity, Color $color, Log $log, Professional $professional)
     {
         $this->activity     = $activity;
+        $this->color        = $color;
+        $this->log          = $log;
         $this->professional = $professional;
     }
 
@@ -38,8 +55,8 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = $this->activity->with(['professional'])
-                        ->orderBy('end_date', 'ASC')
-                        ->get();
+            ->orderBy('end_date', 'ASC')
+            ->get();
 
         return view('activities.index', compact('activities'));
     }
@@ -51,21 +68,32 @@ class ActivityController extends Controller
      */
     public function create()
     {
+        $colorsAll     = $this->color->pluck('color');
+        $colorsUsed    = $this->activity->pluck('color')->unique();
         $professionals = $this->professional->pluck('full_name', 'id');
+        $colors        = $colorsAll->diff($colorsUsed);
 
-        return view('activities.create', compact('professionals'));
+        return view('activities.create', compact('colors', 'professionals'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        try
+        {
+            $this->activity->create(request()->all());
+
+            return response()->json(['status' => true, 'url' => '/activities']);
+        } catch ( Exception $e )
+        {
+            $this->log->error("Error Store Activity: " . $e->getMessage());
+
+            return response()->json(['status' => false]);
+        }
     }
 
     /**

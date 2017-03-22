@@ -19,8 +19,9 @@ class CreateActivitiesTable extends Migration
             $table->unsignedInteger('professional_id')->nullable();
             $table->string('name');
             $table->float('amount');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->string('color');
             $table->timestamps();
         });
 

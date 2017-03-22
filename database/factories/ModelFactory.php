@@ -23,8 +23,9 @@ $factory->define(CornerStudio\Http\Entities\Activity::class, function (Faker\Gen
         'professional_id' => rand(1, 25),
         'name'            => $faker->sentence($nbWords = 2),
         'amount'          => $faker->numberBetween(9990, 29990),
-        'start_date'      => Carbon::createFromFormat('U', $randomStart),
-        'end_date'        => Carbon::createFromFormat('U', $randomEnd)
+        'start_date'      => Carbon::createFromFormat('U', $randomStart)->format('Y-m-d'),
+        'end_date'        => Carbon::createFromFormat('U', $randomEnd)->format('Y-m-d'),
+        'color'           => $faker->randomElement(['#DCE775', '#4FC3F7', '#7986CB', '#E0E0E0', '#FFB74D'])
     ];
 });
 

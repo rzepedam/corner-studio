@@ -16,5 +16,9 @@
     "lodash": "^4.17.4",
     "vue": "^2.1.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "fullcalendar": "^3.2.0",
+    "moment": "^2.18.0",
+    "sweetalert": "^1.1.3"
+  }
 }
