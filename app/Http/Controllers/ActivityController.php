@@ -56,7 +56,7 @@ class ActivityController extends Controller
     {
         $activities = $this->activity->with(['professional'])
             ->orderBy('end_date', 'ASC')
-            ->get();
+            ->paginate(20);
 
         return view('activities.index', compact('activities'));
     }

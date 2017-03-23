@@ -20,4 +20,6 @@
         </div>
     </div>
 
+    {{ $activities->links() }}
+
 @stop

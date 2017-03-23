@@ -10,7 +10,7 @@
 
 @section('content')
 
-    <div id="calendar" class="col-xs-12 col-sm-12 col-md-9"></div>
+    <div id="calendar" class="col-xs-12 col-sm-12 col-md-12"></div>
     <div class="clearfix"></div>
 
 @stop

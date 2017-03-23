@@ -53,7 +53,7 @@
             </a>
         </li>
         <li class="{{ Request::is('incomes') ? 'active' : '' }}">
-            <a href="javascript:void(0)">
+            <a href="{{ route('incomes') }}">
                 <i class="mdi mdi-chart-areaspline" aria-hidden="true"></i> <span class="nav-label">Ingresos</span>
             </a>
         </li>

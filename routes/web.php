@@ -11,3 +11,4 @@ Route::resource('clients', 'ClientController');
 Route::resource('subscriptions', 'SubscriptionController');
 Route::resource('activities', 'ActivityController');
 Route::resource('schedules', 'ScheduleController');
+Route::get('/incomes', ['as' => 'incomes', 'uses' => 'IncomeController@index']);
