@@ -12,7 +12,6 @@ const { mix } = require('laravel-mix');
  */
 
 mix
-    // Layout CSS
     .combine([
         'resources/assets/inspinia/css/bootstrap.min.css',
         'node_modules/mdi/css/materialdesignicons.min.css',
@@ -136,8 +135,4 @@ mix
     // Incomes
     .scripts([
         'node_modules/chart.js/dist/Chart.js',
-        ], 'public/js/incomes.js')
-
-    .copy('resources/assets/inspinia/css/style.css', 'public/css');
-
-
+    ], 'public/js/incomes.js');

@@ -2,4 +2,9 @@
 /vendor
 /.idea
 .env
-/public
+/public/css
+/public/fonts
+/public/img
+/public/js
+.DS_Store
+public/mix-manifest.json
