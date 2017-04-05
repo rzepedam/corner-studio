@@ -27,6 +27,7 @@ class CreateProfessionalsTable extends Migration
             $table->date('birthday');
             $table->boolean('is_male');
             $table->string('email');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

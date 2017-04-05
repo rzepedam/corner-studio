@@ -6,17 +6,22 @@ $('#btnSubmit').click(function (e) {
     var action = $('#form-submit').attr('action');
     var button = $(this);
 
-    button.addClass('btn-success').html('<i class="mdi mdi-cached mdi-rotate-3d"></i> Guardando...');
+    button.addClass('hide')
+    $('#spinner').removeClass('hide');
+
     $.post(action,
         form.serialize(),
         function (response) {
             if (response.status) {
                 window.location.href = response.url;
             } else {
-                alert("Oops, ha ocurrido un error. No es posible conectar con el servidor.");
+                button.removeClass('hide')
+                $('#spinner').addClass('hide');
+                sweetAlert("Oops...", "Ha ocurrido un error. No es posible conectar con el servidor!", "error");
             }
         }).fail(function (response) {
-            button.removeClass('btn-success').html('<i class="mdi mdi-floppy"></i> Guardar');
+            button.removeClass('hide')
+            $('#spinner').addClass('hide');
             var errors = $.parseJSON(response.responseText);
             $.each(errors, function (index, value) {
                 $('#js').html('<i class="fa fa-times"></i> ' + value).removeClass('hide');

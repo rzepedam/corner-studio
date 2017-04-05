@@ -13,8 +13,10 @@ class AddressTableSeeder extends Seeder
     {
         DB::table('addresses')->truncate();
 
+        // Create Clients
         factory(\CornerStudio\Http\Entities\Address::class, 25)->create();
 
+        // Create Professionals
         factory(\CornerStudio\Http\Entities\Address::class, 25)->create([
             'addressable_id' => function () {
                 return factory(\CornerStudio\Http\Entities\Professional::class)->create()->id;

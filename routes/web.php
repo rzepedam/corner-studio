@@ -8,7 +8,13 @@ Route::get('/', ['as' => 'home', 'uses' => function ()
 }]);
 
 Route::resource('clients', 'ClientController');
-Route::resource('subscriptions', 'SubscriptionController');
+Route::resource('professionals', 'ProfessionalController');
 Route::resource('activities', 'ActivityController');
+Route::resource('subscriptions', 'SubscriptionController');
 Route::resource('schedules', 'ScheduleController');
 Route::get('/incomes', ['as' => 'incomes', 'uses' => 'IncomeController@index']);
+
+// Ajax methods -> AjaxController
+Route::get('/loadCommunes', 'AjaxController@loadCommunes');
+Route::get('/loadProvinces', 'AjaxController@loadProvinces');
+

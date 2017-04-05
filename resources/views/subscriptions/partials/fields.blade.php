@@ -22,21 +22,26 @@
 </div>
 <div class="row">
     {{-- Nº Documento text field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    <div class="col-xs-12 col-sm-2 col-md-2 form-group">
     	{{ Form::label('num_voucher', 'Nº Documento') }}
-    	{{ Form::text('num_voucher', null, ['class' => 'form-control']) }}
+    	{{ Form::text('num_voucher', null, ['class' => 'form-control text-center']) }}
     </div>
     {{-- Día Pago date field --}}
-    <div class="col-xs-12 col-sm-4 col-md-4 form-group">
+    <div class="col-xs-12 col-sm-2 col-md-2 form-group">
         {{ Form::label('payday', 'Día Pago') }}
         {{ Form::text('payday', null, ['class' => 'form-control text-center']) }}
     </div>
-</div>
-<div class="hr-line-dashed"></div>
-<div class="row">
     {{-- Actividades select field --}}
-    <div class="col-xs-12 col-sm-12 col-md-12 form-group">
-    	{{ Form::label('activities[]', 'Actividades') }}
-    	{{ Form::select('activities[]', $activities, null, ['class' => 'form-control chosen-select', 'multiple', 'data-placeholder' => 'Seleccione Actividades...']) }}
+    <div class="col-xs-12 col-sm-8 col-md-8 form-group">
+        {{ Form::label('activities[]', 'Actividades') }}
+        @if (Route::is('subscriptions.create'))
+            {{ Form::select('activities[]', $activities, null, ['class' => 'form-control chosen-select', 'multiple', 'data-placeholder' => 'Seleccione Actividades...']) }}
+        @else
+            <select name="activities[]" class="form-control chosen-select" multiple>
+                @foreach($activities as $activity)
+                    <option value="{{ $activity->id }}" {{ $subscription->activities->contains($activity) ? 'selected' : '' }}>{{ $activity->name }}</option>
+                @endforeach
+            </select>
+        @endif
     </div>
 </div>

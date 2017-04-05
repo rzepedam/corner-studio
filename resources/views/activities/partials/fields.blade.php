@@ -12,7 +12,7 @@
     {{-- Valor text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('amount', 'Valor') }}
-    	{{ Form::text('amount', null, ['class' => 'form-control']) }}
+    	{{ Form::text('amount', Route::is('activities.create') ? null : '$ ' . $activity->amount, ['class' => 'form-control money']) }}
     </div>
 </div>
 <div class="row">
@@ -45,5 +45,8 @@
         @foreach($colors as $color)
             <button id="{{ $color }}" class="btn btn-circle btn-outline btn-custom-color" style="border-color: {{ $color }}" type="button"></button>
         @endforeach
+        @if (Route::is('activities.edit'))
+            <button id="{{ $activity->color }}" class="btn btn-circle btn-outline btn-custom-color" style="border-color: {{ $activity->color }}; background: {{ $activity->color }};" type="button"></button>
+        @endif
     </div>
 </div>

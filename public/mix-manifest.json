@@ -2,11 +2,17 @@
   "/mix.js": "/mix.js",
   "/css/layout.css": "/css/layout.css",
   "/js/layout.js": "/js/layout.js",
+  "/js/index-common.js": "/js/index-common.js",
   "/js/create-edit-common.js": "/js/create-edit-common.js",
+  "/css/create-custom-client.css": "/css/create-custom-client.css",
+  "/js/create-custom-client.js": "/js/create-custom-client.js",
+  "/css/create-custom-professional.css": "/css/create-custom-professional.css",
+  "/js/create-custom-professional.js": "/js/create-custom-professional.js",
   "/css/create-custom-activity.css": "/css/create-custom-activity.css",
   "/js/create-custom-activity.js": "/js/create-custom-activity.js",
   "/css/create-custom-subscription.css": "/css/create-custom-subscription.css",
   "/js/create-custom-subscription.js": "/js/create-custom-subscription.js",
   "/css/schedules.css": "/css/schedules.css",
-  "/js/schedules.js": "/js/schedules.js"
+  "/js/schedules.js": "/js/schedules.js",
+  "/js/incomes.js": "/js/incomes.js"
 }

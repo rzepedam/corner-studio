@@ -16,8 +16,8 @@ use Carbon\Carbon;
 
 $factory->define(CornerStudio\Http\Entities\Activity::class, function (Faker\Generator $faker)
 {
-    $randomStart = mt_rand(Carbon::now()->timestamp, Carbon::parse('+1 month')->timestamp);
-    $randomEnd   = mt_rand(Carbon::parse('+2 months')->timestamp, Carbon::parse('+12 months')->timestamp);
+    $randomStart = mt_rand(Carbon::now()->timestamp, Carbon::parse('+3 month')->timestamp);
+    $randomEnd   = mt_rand(Carbon::parse('+4 months')->timestamp, Carbon::parse('+12 months')->timestamp);
 
     return [
         'professional_id' => rand(1, 25),
@@ -25,7 +25,9 @@ $factory->define(CornerStudio\Http\Entities\Activity::class, function (Faker\Gen
         'amount'          => $faker->numberBetween(9990, 29990),
         'start_date'      => Carbon::createFromFormat('U', $randomStart)->format('Y-m-d'),
         'end_date'        => Carbon::createFromFormat('U', $randomEnd)->format('Y-m-d'),
-        'color'           => $faker->randomElement(['#DCE775', '#4FC3F7', '#7986CB', '#E0E0E0', '#FFB74D'])
+        'color'           => $faker->randomElement(['#E57373', '#F06292', '#BA68C8', '#9575CD', '#7986CB', '#64B5F6',
+            '#4FC3F7', '#4DD0E1', '#4DB6AC', '#81C784', '#AED581', '#DCE775',
+            '#FFF176', '#FFB74D', '#FF8A65', '#A1887F', '#E0E0E0', '#90A4AE'])
     ];
 });
 
@@ -37,7 +39,7 @@ $factory->define(CornerStudio\Http\Entities\Address::class, function (Faker\Gene
             return factory(\CornerStudio\Http\Entities\Client::class)->create()->id;
         },
         'addressable_type' => 'CornerStudio\Http\Entities\Client',
-        'commune_id'       => factory(\CornerStudio\Http\Entities\Commune::class)->create()->id,
+        'commune_id'       => rand(1, 395),
         'address'          => $faker->address,
         'depto'            => '',
         'block'            => '',
@@ -144,14 +146,16 @@ $factory->define(CornerStudio\Http\Entities\Region::class, function (Faker\Gener
 
 $factory->define(CornerStudio\Http\Entities\Subscription::class, function (Faker\Generator $faker)
 {
-    $randomEnd = mt_rand(Carbon::parse('+10 days')->timestamp, Carbon::parse('+12 months')->timestamp);
+    $randomStart = mt_rand(Carbon::parse('-12 months')->timestamp, Carbon::now()->timestamp);
+    $randomEnd   = mt_rand(Carbon::parse('+10 days')->timestamp, Carbon::parse('+12 months')->timestamp);
 
     return [
-        'client_id'   => factory(\CornerStudio\Http\Entities\Client::class)->create()->id,
+        'client_id'   => rand(1, 25),
         'payment_id'  => factory(\CornerStudio\Http\Entities\Payment::class)->create()->id,
         'end_date'    => Carbon::createFromFormat('U', $randomEnd)->format('d-m-Y'),
         'num_voucher' => $faker->numberBetween(100000, 999999),
-        'payday'      => $faker->numberBetween(1, 30)
+        'payday'      => $faker->numberBetween(1, 30),
+        'created_at'  => Carbon::createFromFormat('U', $randomStart)
     ];
 });
 

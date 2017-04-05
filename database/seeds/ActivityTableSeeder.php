@@ -13,5 +13,13 @@ class ActivityTableSeeder extends Seeder
     {
         DB::table('activities')->truncate();
         factory(\CornerStudio\Http\Entities\Activity::class, 30)->create();
+
+        $activities    = \CornerStudio\Http\Entities\Activity::all();
+        $subscriptions = \CornerStudio\Http\Entities\Subscription::all();
+
+        foreach ( $activities as $activity )
+        {
+            $activity->subscriptions()->attach($subscriptions->random());
+        }
     }
 }

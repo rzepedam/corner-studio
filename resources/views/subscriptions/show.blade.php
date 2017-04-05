@@ -30,7 +30,7 @@
                             </tr>
                             <tr>
                                 <td>Fecha Término</td>
-                                <td class="text-capitalize text-center">{{ $subscription->end_date }}</td>
+                                <td class="text-capitalize text-center">{{ $subscription->text_end_date }}</td>
                             </tr>
                             <tr>
                                 <td>Nº Documento</td>
@@ -45,7 +45,7 @@
                                 <td class="text-center">
                                     @foreach($subscription->activities as $activity)
                                         <?php $random = array_rand(config('constants.colors'), 1); ?>
-                                        <span class="badge badge-{{ $random }}">
+                                        <span class="badge badge-{{ $random }}" style="background: {{ $activity->color }}">
                                             <a href="{{ url('activities/' . $activity->id) }}">{{ $activity->name }}</a>
                                         </span>
                                     @endforeach

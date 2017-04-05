@@ -2,12 +2,14 @@
 
 namespace CornerStudio\Http\Controllers;
 
+use Exception;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Payment;
 use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Subscription;
+use CornerStudio\Http\Requests\SubscriptionRequest;
 
 class SubscriptionController extends Controller
 {
@@ -63,8 +65,8 @@ class SubscriptionController extends Controller
     public function index()
     {
         $subscriptions = $this->subscription->with(['client', 'payment', 'activities'])
-            ->orderBy('end_date')
-            ->get();
+            ->orderBy('id', 'DESC')
+            ->paginate(25);
 
         return view('subscriptions.index', compact('subscriptions'));
     }
@@ -86,9 +88,11 @@ class SubscriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param SubscriptionRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(SubscriptionRequest $request)
     {
         DB::beginTransaction();
         try
@@ -130,20 +134,40 @@ class SubscriptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subscription = $this->subscription->findOrFail($id);
+        $activities   = $this->activity->get();
+        $clients      = $this->client->pluck('full_name', 'id');
+        $payments     = $this->payment->pluck('name', 'id');
+
+        return view('subscriptions.edit', compact('activities', 'clients', 'subscription', 'payments'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param SubscriptionRequest $request
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubscriptionRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try
+        {
+            $subscription = $this->subscription->with(['activities'])->findOrFail($id);
+            $subscription->update(request()->all());
+            $subscription->activities()->sync(request('activities'));
+            DB::commit();
+
+            return response()->json(['status' => true, 'url' => '/subscriptions']);
+        } catch ( Exception $e )
+        {
+            $this->log->error("Error Update Subscription: " . $e->getMessage());
+            DB::rollBack();
+
+            return response()->json(['status' => false]);
+        }
     }
 
     /**
@@ -155,6 +179,17 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $subscription = $this->subscription->findOrFail($id);
+            $subscription->delete();
+
+            return response()->json(['status' => true]);
+        } catch ( Exception $e )
+        {
+            $this->log->error('Error Delete Subscription: ' . $e->getMessage());
+
+            return response()->json(['status' => false]);
+        }
     }
 }

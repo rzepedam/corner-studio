@@ -3,11 +3,11 @@
 namespace CornerStudio\Http\Controllers;
 
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use CornerStudio\Http\Entities\Color;
 use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Professional;
+use CornerStudio\Http\Requests\ActivityRequest;
 
 class ActivityController extends Controller
 {
@@ -56,7 +56,7 @@ class ActivityController extends Controller
     {
         $activities = $this->activity->with(['professional'])
             ->orderBy('end_date', 'ASC')
-            ->paginate(20);
+            ->paginate(25);
 
         return view('activities.index', compact('activities'));
     }
@@ -79,9 +79,11 @@ class ActivityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param ActivityRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ActivityRequest $request)
     {
         try
         {
@@ -105,7 +107,9 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        $activity = $this->activity->with(['professional'])->findOrFail($id);
+
+        return view('activities.show', compact('activity'));
     }
 
     /**
@@ -117,20 +121,38 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity      = $this->activity->findOrFail($id);
+        $colorsAll     = $this->color->pluck('color');
+        $colorsUsed    = $this->activity->pluck('color')->unique();
+        $colors        = $colorsAll->diff($colorsUsed);
+        $professionals = $this->professional->pluck('full_name', 'id');
+
+
+        return view('activities.edit', compact('activity', 'colors', 'professionals'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param ActivityRequest $request
      * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActivityRequest $request, $id)
     {
-        //
+        try
+        {
+            $activity = $this->activity->findOrFail($id);
+            $activity->update(request()->all());
+
+            return response()->json(['status' => true, 'url' => '/activities']);
+        } catch ( Exception $e )
+        {
+            $this->log->error("Error Store Activity: " . $e->getMessage());
+
+            return response()->json(['status' => false]);
+        }
     }
 
     /**
@@ -142,6 +164,17 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $activity = $this->activity->findOrFail($id);
+            $activity->delete();
+
+            return response()->json(['status' => true]);
+        } catch ( Exception $e )
+        {
+            $this->log->error('Error Delete Activity: ' . $e->getMessage());
+
+            return response()->json(['status' => false]);
+        }
     }
 }

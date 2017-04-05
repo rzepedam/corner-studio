@@ -22,10 +22,11 @@ class CreateClientsTable extends Migration
             $table->string('first_name');
             $table->string('second_name');
             $table->string('full_name');
-            $table->string('rut');
+            $table->string('rut')->unique();
             $table->date('birthday');
             $table->boolean('is_male');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

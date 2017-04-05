@@ -12,6 +12,7 @@ class SubscriptionTableSeeder extends Seeder
     public function run()
     {
         DB::table('subscriptions')->truncate();
+
         factory(\CornerStudio\Http\Entities\Subscription::class, 25)->create();
     }
 }

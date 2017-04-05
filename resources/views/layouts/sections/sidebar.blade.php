@@ -33,8 +33,8 @@
             </a>
         </li>
         <li class="{{ Request::is('professionals') ? 'active' : '' }}">
-            <a href="javascript:void(0)">
-                <i class="mdi mdi-worker" aria-hidden="true"></i> <span class="nav-label">Profesionales</span>
+            <a href="{{ route('professionals.index') }}">
+                <i class="mdi mdi-human-greeting" aria-hidden="true"></i> <span class="nav-label">Profesionales</span>
             </a>
         </li>
         <li class="{{ Request::is('activities') ? 'active' : '' }}">

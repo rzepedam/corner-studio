@@ -17,7 +17,11 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "autoNumeric": "^1.9.46",
+    "chart.js": "^2.5.0",
+    "chosen-js": "^1.7.0",
     "fullcalendar": "^3.2.0",
+    "jquery.rut": "^1.1.2",
     "moment": "^2.18.0",
     "sweetalert": "^1.1.3"
   }

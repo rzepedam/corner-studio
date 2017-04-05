@@ -20,6 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->date('end_date');
             $table->string('num_voucher');
             $table->string('payday');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

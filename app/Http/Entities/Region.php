@@ -17,4 +17,13 @@ class Region extends Model
      * @var bool
      */
     public $timestamps = false;
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function provinces()
+    {
+        return $this->hasMany(Province::class);
+    }
 }

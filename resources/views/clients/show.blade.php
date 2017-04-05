@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <td>Fecha Nacimiento</td>
-                                <td class="text-capitalize text-center">{{ $client->birthday }}</td>
+                                <td class="text-capitalize text-center">{{ $client->text_birthday }}</td>
                             </tr>
                             <tr>
                                 <td>Estado Civil</td>
@@ -38,12 +38,12 @@
                             </tr>
                             <tr>
                                 <td>Sexo</td>
-                                <td class="text-center">{{ $client->is_male }}</td>
+                                <td class="text-center">{{ $client->text_is_male }}</td>
                             </tr>
                             <tr>
                                 <td>Domicilio</td>
                                 <td class="text-center">
-                                    {{ $client->address->address }}
+                                    {{ $client->address->complete_address }}
                                 </td>
                             </tr>
                             <tr>
@@ -56,12 +56,17 @@
                             </tr>
                             <tr>
                                 <td>Teléfono 2</td>
-                                <td class="text-center">{{ $client->address->phone2 }}</td>
+                                <td class="text-center">{{ is_null($client->address->phone2) ? '-' : $client->address->phone2 }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('clients.index') }}">Volver</a>
         </div>
     </div>
 

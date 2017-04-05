@@ -6,9 +6,12 @@ use Carbon\Carbon;
 use Jenssegers\Date\Date;
 use CornerStudio\Http\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */
@@ -21,7 +24,7 @@ class Client extends Model
      * @var array
      */
     protected $dates = [
-        'birthday'
+        'birthday', 'deleted_at'
     ];
 
 
@@ -38,7 +41,7 @@ class Client extends Model
      */
     public function maritalStatus()
     {
-    	return $this->belongsTo(MaritalStatus::class);
+        return $this->belongsTo(MaritalStatus::class);
     }
 
     /**
@@ -46,9 +49,49 @@ class Client extends Model
      */
     public function country()
     {
-    	return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+
+    /**
+     * @param string $value
+     */
+    public function setMaleSurnameAttribute($value)
+    {
+        $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setFemaleSurnameAttribute($value)
+    {
+        $this->attributes['female_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst(mb_strtolower($value, 'utf-8'));
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setSecondNameAttribute($value)
+    {
+        $this->attributes['second_name'] = ucwords(mb_strtolower($value, 'utf-8'));
+    }
 
     /**
      * @param string $value format 12.345.678-9
@@ -97,21 +140,38 @@ class Client extends Model
     }
 
     /**
-     * @param $value '1978-07-20'
-     * @return string 'jueves 20 julio 1978'
+     * @param $value '20-07-1978'
+     *
+     * @return string '1978-07-20'
      */
     public function getBirthdayAttribute($value)
     {
-        return Date::parse($value)->format('l j F Y');
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     /**
-     * @param $value '0 or 1'
-     * @return string 'Masculino or Femenino'
+     * @return string 'jueves 20 julio 1978'
+     */
+    public function getTextBirthdayAttribute()
+    {
+        return Date::parse($this->birthday)->format('l j F Y');
+    }
+
+    /**
+     * @param $value 0 or 1
+     *
+     * @return boolean
      */
     public function getIsMaleAttribute($value)
     {
-        return $value ? 'Masculino' : 'Femenino';
+        return $value === 1;
     }
 
+    /**
+     * @return string 'Masculino or Femenino'
+     */
+    public function getTextIsMaleAttribute()
+    {
+        return $this->getOriginal('is_male') ? 'Masculino' : 'Femenino';
+    }
 }

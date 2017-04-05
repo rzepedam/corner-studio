@@ -6,10 +6,11 @@ use Carbon\Carbon;
 use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Model;
 use CornerStudio\Traits\DatesTranslator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscription extends Model
 {
-    use DatesTranslator;
+    use DatesTranslator, SoftDeletes;
 
     /**
      * @var array
@@ -22,7 +23,7 @@ class Subscription extends Model
      * @var array
      */
     protected $dates = [
-        'end_date'
+        'end_date', 'deleted_at'
     ];
 
 
@@ -31,7 +32,7 @@ class Subscription extends Model
      */
     public function client()
     {
-    	return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class);
     }
 
     /**
@@ -61,11 +62,20 @@ class Subscription extends Model
 
     /**
      * @param $value '1978-07-20'
-     * @return string 'jueves 20 julio 1978'
+     *
+     * @return string '20-07-1978'
      */
     public function getEndDateAttribute($value)
     {
-        return Date::parse($value)->format('l j F Y');
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    /**
+     * @return string 'jueves 20 julio 1978'
+     */
+    public function getTextEndDateAttribute()
+    {
+        return Date::parse($this->end_date)->format('l j F Y');
     }
 
     /**

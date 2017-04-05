@@ -23,3 +23,9 @@
     {{ $activities->links() }}
 
 @stop
+
+@section('scripts')
+
+    <script src="{{ elixir('js/index-common.js') }}"></script>
+
+@stop

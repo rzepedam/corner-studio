@@ -24,12 +24,12 @@
     {{-- Rut text field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label('rut', 'Rut') }}
-        {{ Form::text('rut', null, ['class' => 'form-control']) }}
+        {{ Form::text('rut', null, ['class' => 'form-control', 'id' => 'rut']) }}
     </div>
     {{-- Fecha Nacimiento date field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
         {{ Form::label("birthday", "Fecha Nacimiento", ["class" => "control-label"]) }}
-        <div class="input-group date" data-plugin="datepicker" data-end-date="{{ date("d-m-Y") }}">
+        <div class="input-group date">
             {{ Form::text("birthday", null, ["class" => "form-control text-center", "readonly"]) }}
             <div class="input-group-addon">
                 <i class="mdi mdi-calendar"></i>
@@ -54,15 +54,22 @@
     	<ul class="list-unstyled list-inline text-center">
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	        	<input type="radio" id="male" name="is_male" value="1" />
+                    @if (Route::is('clients.create'))
+                        <input type="radio" id="male" name="is_male" value="1" />
+                    @else
+                        <input type="radio" id="male" name="is_male" value="1" {{ $client->is_male ? 'checked' : '' }} />
+                    @endif
     	            <label for="male">Masculino</label>
     	        </div>
     	    </li>
     	    <li></li>
     	    <li>
     	        <div class="radio-custom radio-primary">
-    	            <input type="radio" id="female" name="is_male" value="0tf can_formatted_birthday_client
-" />
+                    @if (Route::is('clients.create'))
+                        <input type="radio" id="female" name="is_male" value="0" />
+                    @else
+                        <input type="radio" id="female" name="is_male" value="0" {{ $client->is_male ? '' : 'checked' }} />
+                    @endif
     	            <label for="female">Femenino</label>
     	        </div>
     	    </li>
@@ -73,34 +80,34 @@
     {{-- Dirección text field --}}
     <div class="col-xs-12 col-sm-6 col-md-6 form-group">
     	{{ Form::label('address', 'Dirección') }}
-    	{{ Form::text('address', null, ['class' => 'form-control']) }}
+    	{{ Form::text('address', Route::is('clients.create') ? null : $client->address->address, ['class' => 'form-control']) }}
     </div>
     {{-- Depto text field --}}
     <div class="col-xs-12 col-sm-3 col-md-3 form-group">
     	{{ Form::label('depto', 'Depto') }}
-    	{{ Form::text('depto', null, ['class' => 'form-control']) }}
+    	{{ Form::text('depto', Route::is('clients.create') ? null : $client->address->depto, ['class' => 'form-control']) }}
     </div>
     {{-- Block text field --}}
     <div class="col-xs-12 col-sm-3 col-md-3 form-group">
     	{{ Form::label('block', 'Block') }}
-    	{{ Form::text('block', null, ['class' => 'form-control']) }}
+    	{{ Form::text('block', Route::is('clients.create') ? null : $client->address->block, ['class' => 'form-control']) }}
     </div>
 </div>
 <div class="row">
     {{-- Región select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('region_id', 'Región') }}
-    	{{ Form::select('region_id', $regions, null, ['class' => 'form-control']) }}
+    	{{ Form::select('region_id', $regions, Route::is('clients.create') ? null : $client->address->commune->province->region->id, ['class' => 'form-control']) }}
     </div>
     {{-- Provincia select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('province_id', 'Provincia') }}
-    	{{ Form::select('province_id', [0 => 'Seleccione Provincia...'], null, ['class' => 'form-control']) }}
+    	{{ Form::select('province_id', Route::is('clients.create') ? $provinces : $provinces, Route::is('clients.create') ? null : $client->address->commune->province->id, ['class' => 'form-control']) }}
     </div>
     {{-- Comuna select field --}}
     <div class="col-xs-12 col-sm-4 col-md-4 form-group">
     	{{ Form::label('commune_id', 'Comuna') }}
-    	{{ Form::select('commune_id', [0 => 'Seleccione Comuna...'], null, ['class' => 'form-control']) }}
+    	{{ Form::select('commune_id', Route::is('clients.create') ? $communes : $communes, Route::is('clients.create') ? null : $client->address->commune->id, ['class' => 'form-control']) }}
     </div>
 </div>
 <div class="row">
@@ -112,11 +119,11 @@
     {{-- Teléfono 1 text field --}}
     <div class="col-xs-12 col-sm-3 col-md-3 form-group">
     	{{ Form::label('phone1', 'Teléfono 1') }}
-    	{{ Form::text('phone1', null, ['class' => 'form-control']) }}
+    	{{ Form::text('phone1', Route::is('clients.create') ? null : $client->address->phone1, ['class' => 'form-control']) }}
     </div>
     {{-- Teléfono 2 text field --}}
     <div class="col-xs-12 col-sm-3 col-md-3 form-group">
     	{{ Form::label('phone2', 'Teléfono 2') }}
-    	{{ Form::text('phone2', null, ['class' => 'form-control']) }}
+    	{{ Form::text('phone2', Route::is('clients.create') ? null : $client->address->phone2, ['class' => 'form-control']) }}
     </div>
 </div>

@@ -26,4 +26,12 @@ class Province extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function communes()
+    {
+        return $this->hasMany(Commune::class);
+    }
 }
