@@ -106,6 +106,7 @@ mix
     .combine([
         'node_modules/chosen-js/chosen.css',
         'resources/assets/inspinia/css/datepicker3.css',
+        'resources/assets/inspinia/css/style.css'
     ], 'public/css/create-custom-subscription.css')
 
     // Files to copy
