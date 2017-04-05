@@ -17,7 +17,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "autoNumeric": "^1.9.46",
+    "autonumeric": "^1.9.46",
     "chart.js": "^2.5.0",
     "chosen-js": "^1.7.0",
     "fullcalendar": "^3.2.0",
