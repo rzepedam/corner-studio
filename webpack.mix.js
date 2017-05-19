@@ -1,16 +1,5 @@
 const { mix } = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
 mix
     .combine([
         'resources/assets/inspinia/css/bootstrap.min.css',
@@ -26,6 +15,7 @@ mix
     // Images to copy
     .copy('resources/assets/inspinia/img/header-profile.png', 'public/css/patterns')
     .copy('resources/assets/custom/img/logo.png', 'public/img')
+    .copy('resources/assets/custom/img/logo_full.png', 'public/img')
     .copy('resources/assets/inspinia/img/profile_small.jpg', 'public/img')
 
     // Layout JS
@@ -44,6 +34,18 @@ mix
     // Fonts
     .copy('node_modules/mdi/fonts', 'public/fonts')
     .copy('resources/assets/custom/fonts', 'public/fonts')
+
+    // Login
+    .combine([
+        'resources/assets/inspinia/css/bootstrap.min.css',
+        'resources/assets/custom/css/font-awesome.min.css',
+        'resources/assets/inspinia/css/animate.css',
+        'resources/assets/inspinia/css/style.css',
+    ], 'public/css/login.css')
+    .scripts([
+        'resources/assets/inspinia/js/jquery-2.1.1.js',
+        'resources/assets/inspinia/js/bootstrap.min.js'
+    ], 'public/js/login.js')
 
     // Index Common
     .scripts('resources/assets/corner-studio/utilities/delete.js', 'public/js/index-common.js')
@@ -131,3 +133,6 @@ mix
     .scripts([
         'node_modules/chart.js/dist/Chart.js',
     ], 'public/js/incomes.js');
+
+// Versioning
+    mix.version();

@@ -30,7 +30,7 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="{{ elixir('js/incomes.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/incomes.js') }}"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {

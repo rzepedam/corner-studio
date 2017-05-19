@@ -2,7 +2,7 @@
 
 namespace CornerStudio\Http\Controllers\Auth;
 
-use CornerStudio\User;
+use CornerStudio\Http\EntitiesUser;
 use CornerStudio\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;

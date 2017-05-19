@@ -8,14 +8,13 @@
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="clear">
                         <span class="block m-t-xs">
-                            <strong class="font-bold">David Williams</strong>
+                            <strong class="font-bold">{{ auth()->user()->name }}</strong>
                         </span>
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                     </span>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                     <li><a href="javascript:void(0)">Editar Perfil</a></li>
-                    <li><a href="javascript:void(0)">Cerrar Sesión</a></li>
                 </ul>
             </div>
             <div class="logo-element">

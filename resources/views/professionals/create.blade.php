@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/create-custom-professional.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/create-custom-professional.css') }}">
 
 @stop
 
@@ -52,8 +52,8 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/create-custom-professional.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-custom-professional.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.input-group.date').datepicker("setDate", "-18y");

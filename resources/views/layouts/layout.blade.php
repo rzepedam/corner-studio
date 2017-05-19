@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="/img/logo.png">
     <title>Corner-Studio | @yield('title')</title>
-    <link rel="stylesheet" href="{{ elixir('css/layout.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/layout.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     @yield('css')
@@ -49,7 +49,7 @@
 
 </div>
 
-<script src="{{ elixir('js/layout.js') }}"></script>
+<script src="{{ mix('js/layout.js') }}"></script>
 
 @yield('scripts')
 

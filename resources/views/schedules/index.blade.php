@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/schedules.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/schedules.css') }}">
 
 @stop
 
@@ -35,7 +35,7 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="{{ elixir('js/schedules.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/schedules.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script type="text/javascript">

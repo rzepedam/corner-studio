@@ -8,7 +8,7 @@
 </div>
 <ul class="nav navbar-top-links navbar-right">
     <li>
-        <a href="javascript:void(0)">
+        <a href="{{ route('logout') }}">
             <i class="mdi mdi-logout"></i> Cerrar Sesión
         </a>
     </li>

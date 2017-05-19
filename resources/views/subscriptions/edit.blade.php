@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/create-custom-subscription.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/create-custom-subscription.css') }}">
     <link rel="stylesheet" href="/css/style.css">
 
 @stop
@@ -51,8 +51,8 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script type="text/javascript" src="{{ elixir('js/create-custom-subscription.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('js/create-custom-subscription.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

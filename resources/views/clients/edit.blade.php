@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="{{ elixir('css/create-custom-client.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/create-custom-client.css') }}">
 
 @stop
 
@@ -50,7 +50,7 @@
 
 @section('scripts')
 
-    <script src="{{ elixir('js/create-edit-common.js') }}"></script>
-    <script src="{{ elixir('js/create-custom-client.js') }}"></script>
+    <script src="{{ mix('js/create-edit-common.js') }}"></script>
+    <script src="{{ mix('js/create-custom-client.js') }}"></script>
 
 @stop
