@@ -14,13 +14,13 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->truncate();
 
-        \CornerStudio\Http\Entities\User::create([
+        \CornerStudio\User::create([
             'name' => 'Roberto Zepeda',
             'email' => 'robertozepeda@controlqtime.cl',
             'password' => bcrypt('grupo@lfr@12')
         ]);
 
-        \CornerStudio\Http\Entities\User::create([
+        \CornerStudio\User::create([
             'name' => 'Raúl Meza',
             'email' => 'raulmeza@controlqtime.cl',
             'password' => bcrypt('qwerty')
