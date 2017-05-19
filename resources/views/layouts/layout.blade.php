@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="/img/logo.png">
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
     <title>Corner-Studio | @yield('title')</title>
     <link rel="stylesheet" href="{{ mix('css/layout.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="fixed-navigation mini-navbar pace-done">
+<body class="fixed-navigation pace-done">
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
 

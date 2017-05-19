@@ -36,6 +36,11 @@
                 <i class="mdi mdi-human-greeting" aria-hidden="true"></i> <span class="nav-label">Profesionales</span>
             </a>
         </li>
+        <li class="{{ (Request::is('assistances') ? 'active' : '') }}">
+            <a href="{{ url('/assistances') }}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="nav-label">Registro de Asistencia</span>
+            </a>
+        </li>
         <li class="{{ Request::is('activities') ? 'active' : '' }}">
             <a href="{{ route('activities.index') }}">
                 <i class="mdi mdi-bike" aria-hidden="true"></i> <span class="nav-label">Actividades</span>

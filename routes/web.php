@@ -9,8 +9,12 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('/home', 'HomeController@index');
+    Route::get('passport', function() {
+        return view('passport');
+    });
     Route::resource('clients', 'ClientController');
     Route::resource('professionals', 'ProfessionalController');
+    Route::get('/assistances', 'AssistanceController@index');
     Route::resource('activities', 'ActivityController');
     Route::resource('subscriptions', 'SubscriptionController');
     Route::resource('schedules', 'ScheduleController');

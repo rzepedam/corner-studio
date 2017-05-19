@@ -134,5 +134,9 @@ mix
         'node_modules/chart.js/dist/Chart.js',
     ], 'public/js/incomes.js');
 
+    // Passport
+        mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');
+        mix.copy('resources/assets/passport/app.js', 'public/js/passport.js');
+
 // Versioning
     mix.version();
