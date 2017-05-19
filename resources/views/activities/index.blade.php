@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title') Listado de Actividades @stop
+@section('title') Actividades @stop
 
 @section('content')
 

@@ -23,8 +23,10 @@ mix
         'resources/assets/custom/css/custom-layout.css'
     ], 'public/css/layout.css')
 
-    // Files to copy
+    // Images to copy
     .copy('resources/assets/inspinia/img/header-profile.png', 'public/css/patterns')
+    .copy('resources/assets/custom/img/logo.png', 'public/img')
+    .copy('resources/assets/inspinia/img/profile_small.jpg', 'public/img')
 
     // Layout JS
     .scripts([
@@ -39,16 +41,9 @@ mix
         'resources/assets/custom/js/custom-layout.js'
     ], 'public/js/layout.js')
 
-    // Files to copy
+    // Fonts
     .copy('node_modules/mdi/fonts', 'public/fonts')
     .copy('resources/assets/custom/fonts', 'public/fonts')
-
-    .copy([
-        'resources/assets/inspinia/img/a4.jpg',
-        'resources/assets/inspinia/img/a7.jpg',
-        'resources/assets/inspinia/img/profile.jpg',
-        'resources/assets/inspinia/img/profile_small.jpg',
-    ], 'public/img')
 
     // Index Common
     .scripts('resources/assets/corner-studio/utilities/delete.js', 'public/js/index-common.js')

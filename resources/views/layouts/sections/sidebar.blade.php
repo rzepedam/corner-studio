@@ -3,7 +3,7 @@
         <li class="nav-header">
             <div class="dropdown profile-element">
                 <span>
-                    <img alt="image" class="img-circle" src="{{ asset('img/profile_small.jpg') }}" />
+                    <img alt="image" class="img-circle img-md" src="{{ asset('img/profile_small.jpg') }}" />
                 </span>
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="clear">
@@ -19,12 +19,12 @@
                 </ul>
             </div>
             <div class="logo-element">
-                CS+
+                <img alt="Corner-Studio" style="width: 20px; height: 15px;" class="img-circle" src="{{ asset('img/logo.png') }}" />
             </div>
         </li>
         <li class="{{ Request::is('/') ? 'active' : '' }}">
             <a href="{{ route('home') }}">
-                <i class="mdi mdi-home" aria-hidden="true"></i> <span class="nav-label">Home</span>
+                <i class="mdi mdi-home" aria-hidden="true"></i> <span class="nav-label">Inicio</span>
             </a>
         </li>
         <li class="{{ Request::is('clients') ? 'active' : '' }}">

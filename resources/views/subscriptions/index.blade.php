@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title') Listado de Suscripciones @stop
+@section('title') Suscripciones @stop
 
 @section('content')
 

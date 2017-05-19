@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title') Listado de Profesionales @stop
+@section('title') Profesionales @stop
 
 @section('content')
 

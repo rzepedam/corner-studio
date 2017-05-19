@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title') Listado de Clientes @stop
+@section('title') Clientes @stop
 
 @section('content')
 
