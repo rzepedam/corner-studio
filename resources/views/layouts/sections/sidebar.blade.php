@@ -61,5 +61,10 @@
                 <i class="mdi mdi-chart-areaspline" aria-hidden="true"></i> <span class="nav-label">Ingresos</span>
             </a>
         </li>
+        <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
+            <a href="{{ url('/biometries') }}">
+                <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
+            </a>
+        </li>
     </ul>
 </div>

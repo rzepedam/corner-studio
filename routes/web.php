@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::resource('subscriptions', 'SubscriptionController');
     Route::resource('schedules', 'ScheduleController');
     Route::get('/incomes', ['as' => 'incomes', 'uses' => 'IncomeController@index']);
+    Route::get('/biometries', 'BiometryController@index');
 
     // Ajax methods -> AjaxController
     Route::get('/loadCommunes', 'AjaxController@loadCommunes');

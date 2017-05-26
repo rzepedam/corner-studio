@@ -45,7 +45,7 @@ class AssistanceController extends Controller
         $assistances = $this->assistance->with(['client'])
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-
+        
         return view('assistances.index', compact('assistances'));
     }
 

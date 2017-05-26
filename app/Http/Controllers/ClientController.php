@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Region;
 use CornerStudio\Http\Entities\Country;
+use CornerStudio\Http\Entities\Biometry;
 use CornerStudio\Http\Entities\Province;
 use CornerStudio\Http\Requests\ClientRequest;
 use CornerStudio\Http\Entities\MaritalStatus;
 
 class ClientController extends Controller
 {
+    /**
+     * @var Biometry
+     */
+    protected $biometry;
+
     /**
      * @var Client
      */
@@ -47,6 +53,7 @@ class ClientController extends Controller
     /**
      * ClientController constructor.
      *
+     * @param Biometry $biometry
      * @param Client $client
      * @param Country $country
      * @param Log $log
@@ -54,8 +61,9 @@ class ClientController extends Controller
      * @param Province $province
      * @param Region $region
      */
-    public function __construct(Client $client, Country $country, Log $log, MaritalStatus $maritalStatus, Province $province, Region $region)
+    public function __construct(Biometry $biometry, Client $client, Country $country, Log $log, MaritalStatus $maritalStatus, Province $province, Region $region)
     {
+        $this->biometry      = $biometry;
         $this->client        = $client;
         $this->country       = $country;
         $this->log           = $log;
@@ -110,6 +118,7 @@ class ClientController extends Controller
         {
             $client = $this->client->create(request()->all());
             $client->address()->create(request()->all());
+            $this->biometry->create($client);
             DB::commit();
 
             return response()->json(['status' => true, 'url' => '/clients']);
@@ -199,6 +208,7 @@ class ClientController extends Controller
         try
         {
             $client = $this->client->findOrFail($id);
+            $this->biometry->delete($client);
             $client->subscriptions()->delete();
             $client->delete();
             DB::commit();
