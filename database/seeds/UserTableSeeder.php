@@ -25,5 +25,11 @@ class UserTableSeeder extends Seeder
             'email' => 'raulmeza@controlqtime.cl',
             'password' => bcrypt('qwerty')
         ]);
+
+        \CornerStudio\User::create([
+            'name' => 'Vivian Briones',
+            'email' => 'brionesvalenzuela.vivian@gmail.com',
+            'password' => bcrypt('12345')
+        ]);
     }
 }
