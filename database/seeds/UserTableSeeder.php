@@ -31,5 +31,17 @@ class UserTableSeeder extends Seeder
             'email' => 'brionesvalenzuela.vivian@gmail.com',
             'password' => bcrypt('12345')
         ]);
+
+        \CornerStudio\User::create([
+            'name' => 'Nicolás Jusakos',
+            'email' => 'njusakos@gmail.com',
+            'password' => bcrypt('12345')
+        ]);
+
+        \CornerStudio\User::create([
+            'name' => 'Carolina Vargas',
+            'email' => 'kvz@live.cl',
+            'password' => bcrypt('12345')
+        ]);
     }
 }
