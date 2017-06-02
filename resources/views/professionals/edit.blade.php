@@ -3,9 +3,7 @@
 @section('title') Editar Profesional @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-professional.css') }}">
-
 @stop
 
 @section('breadcrumb')

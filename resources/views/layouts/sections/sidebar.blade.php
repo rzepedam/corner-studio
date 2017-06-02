@@ -14,7 +14,7 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                    <li><a href="javascript:void(0)">Editar Perfil</a></li>
+                    <li><a href="{{ route('users.edit', auth()->id()) }}">Editar Perfil</a></li>
                 </ul>
             </div>
             <div class="logo-element">
@@ -61,10 +61,17 @@
                 <i class="mdi mdi-chart-areaspline" aria-hidden="true"></i> <span class="nav-label">Ingresos</span>
             </a>
         </li>
-        <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
-            <a href="{{ url('/biometries') }}">
-                <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
+        <li class="{{ Request::is('users') ? 'active' : '' }}">
+            <a href="{{ route('users.index') }}">
+                <i class="mdi mdi-face" aria-hidden="true"></i> <span class="nav-label">Usuarios</span>
             </a>
         </li>
+        @if (auth()->user()->is_admin)
+            <li class="{{ (Request::is('biometries') ? 'active' : '') }}">
+                <a href="{{ url('/biometries') }}">
+                    <i class="fa fa-tablet" aria-hidden="true"></i> <span class="nav-label">Biometry</span>
+                </a>
+            </li>
+        @endif
     </ul>
 </div>

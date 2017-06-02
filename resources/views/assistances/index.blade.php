@@ -12,7 +12,7 @@
 
     @include('layouts.messages.error')
 
-    <div class="row animated fadeInRight">
+    <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">

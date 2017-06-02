@@ -50,7 +50,7 @@ mix
     // Index Common
     .scripts('resources/assets/corner-studio/utilities/delete.js', 'public/js/index-common.js')
 
-    // Create Common
+    // Create Edit Common
     .scripts([
         'resources/assets/corner-studio/utilities/submit-form.js'
     ], 'public/js/create-edit-common.js')
@@ -133,6 +133,14 @@ mix
     .scripts([
         'node_modules/chart.js/dist/Chart.js',
     ], 'public/js/incomes.js');
+
+    // Users
+        // Create-Edit
+            mix.scripts('resources/assets/utilities/valida_email.js', 'public/js/users/create-edit.js');
+
+        // Edit
+            mix.combine('node_modules/croppie/croppie.css', 'public/css/users/edit.css')
+                .scripts('node_modules/croppie/croppie.min.js', 'public/js/users/edit.js')
 
     // Passport
         mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');

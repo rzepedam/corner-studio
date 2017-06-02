@@ -8,50 +8,44 @@
     <title>Corner-Studio | @yield('title')</title>
     <link rel="stylesheet" href="{{ mix('css/layout.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     @yield('css')
-
 </head>
 
 <body class="fixed-navigation pace-done">
-<div id="wrapper">
-    <nav class="navbar-default navbar-static-side" role="navigation">
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            @include('layouts.sections.sidebar')
+        </nav>
+        <div id="page-wrapper" class="fixed-sidebar mini-navbar pace-done gray-bg dashboards.dashboard_1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-        @include('layouts.sections.sidebar')
+                    @include('layouts.sections.header')
 
-    </nav>
-
-    <div id="page-wrapper" class="fixed-sidebar mini-navbar pace-done gray-bg dashboards.dashboard_1">
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-
-                @include('layouts.sections.header')
-
-            </nav>
-        </div>
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>
-                    @yield('title')
-                </h2>
-                <ol class="breadcrumb">
-                    @yield('breadcrumb')
-                </ol>
+                </nav>
             </div>
-            <div class="col-lg-2"></div>
-        </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>
+                        @yield('title-header')
+                    </h2>
+                    <ol class="breadcrumb">
+                        @yield('breadcrumb')
+                    </ol>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
 
-            @yield('content')
+                @yield('content')
 
+            </div>
         </div>
+
     </div>
 
-</div>
-
-<script src="{{ mix('js/layout.js') }}"></script>
-
-@yield('scripts')
+    <script src="{{ mix('js/layout.js') }}"></script>
+    @yield('scripts')
 
 </body>
 </html>
