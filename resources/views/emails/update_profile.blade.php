@@ -11,5 +11,3 @@ Si no ha hecho esta modificación, le sugerimos informarnos de esta situación.
 @endcomponent
 
 @endcomponent
-
-
