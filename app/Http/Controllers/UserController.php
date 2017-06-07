@@ -95,11 +95,11 @@ class UserController extends Controller
     public function submitImage()
     {
         $this->validate(request(), [
-            'x'    => ['required', 'numeric'],
-            'y'    => ['required', 'numeric'],
-            'w'    => ['required', 'numeric'],
-            'h'    => ['required', 'numeric'],
-            'file' => ['required', 'image']
+            'x'     => ['required', 'numeric'],
+            'y'     => ['required', 'numeric'],
+            'w'     => ['required', 'numeric'],
+            'h'     => ['required', 'numeric'],
+            'photo' => ['mimes:jpeg,png']
         ]);
 
         DB::beginTransaction();
