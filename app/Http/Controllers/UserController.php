@@ -2,6 +2,7 @@
 
 namespace CornerStudio\Http\Controllers;
 
+use CornerStudio\Http\Requests\AvatarProfileRequest;
 use CornerStudio\User;
 use Illuminate\Http\Request;
 use CornerStudio\Mail\SignUp;
@@ -90,30 +91,21 @@ class UserController extends Controller
     }
 
     /**
+     * @param AvatarProfileRequest $request
+     *
      * @return array|\Illuminate\Http\RedirectResponse
      */
-    public function submitImage()
+    public function submitImage(AvatarProfileRequest $request)
     {
-        $this->validate(request(), [
-            'x'     => ['required', 'numeric'],
-            'y'     => ['required', 'numeric'],
-            'w'     => ['required', 'numeric'],
-            'h'     => ['required', 'numeric'],
-            'photo' => ['mimes:jpeg,png']
-        ]);
-
         DB::beginTransaction();
         try
         {
-            $name  = time() . '.jpg';
-            $image = Image::make(request()->file('file')->getRealPath())
-                ->orientate()
-                ->crop(ceil(request('w')), ceil(request('h')), ceil(request('x')), ceil(request('y')))
-                ->encode('jpg', 100);
-
-            Storage::put($name, $image);
-
-            $user         = User::findOrFail(auth()->id());
+            $name = $this->moveAvatar();
+            $user = $this->user->findOrFail(auth()->id());
+            if ( ! is_null($user->avatar) )
+            {
+                Storage::delete($user->getOriginal('avatar'));
+            }
             $user->avatar = $name;
             $user->save();
             DB::commit();
@@ -203,5 +195,21 @@ class UserController extends Controller
 
             return response()->json(['status' => false]);
         }
+    }
+
+    /**
+     * @return string
+     */
+    protected function moveAvatar()
+    {
+        $name  = time() . '.jpg';
+        $image = Image::make(request()->file('file')->getRealPath())
+            ->orientate()
+            ->crop(ceil(request('w')), ceil(request('h')), ceil(request('x')), ceil(request('y')))
+            ->encode('jpg', 100);
+
+        Storage::put($name, $image);
+
+        return $name;
     }
 }
