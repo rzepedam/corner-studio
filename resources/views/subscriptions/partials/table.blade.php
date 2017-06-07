@@ -27,7 +27,7 @@
                         <i class="mdi mdi-pencil mdi-18px text-warning"></i>
                     </a>
                     <a href="javascript:void(0)" data-id="{{ $subscription->id }}" class="btn-delete" data-url="{{ Request::path() }}" data-token="{{ csrf_token() }}">
-                        <i class="mdi mdi-delete mdi-18px text-danger"></i>
+                        <i class="mdi mdi-delete-empty mdi-18px text-danger"></i>
                     </a>
                 </td>
             </tr>

@@ -182,7 +182,8 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class
+        Laravel\Passport\PassportServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -235,8 +236,9 @@ return [
         /*
          * Custom Aliases
          */
-        'Form'         => Collective\Html\FormFacade::class,
-        'Html'         => Collective\Html\HtmlFacade::class,
-        'Date'         => Jenssegers\Date\Date::class,
+        'Form'  => Collective\Html\FormFacade::class,
+        'Html'  => Collective\Html\HtmlFacade::class,
+        'Date'  => Jenssegers\Date\Date::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 ];

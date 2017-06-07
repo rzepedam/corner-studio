@@ -11,7 +11,7 @@
     @yield('css')
 </head>
 
-<body class="fixed-navigation pace-done">
+<body class="fixed-navigation pace-done skin-1">
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
             @include('layouts.sections.sidebar')

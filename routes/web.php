@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::resource('subscriptions', 'SubscriptionController');
     Route::resource('schedules', 'ScheduleController');
     Route::get('incomes', ['as' => 'incomes', 'uses' => 'IncomeController@index']);
+    Route::post('/users/submitImage', ['as' => 'users.submitImage', 'uses' => 'UserController@submitImage']);
     Route::resource('users', 'UserController');
     Route::get('biometries', 'BiometryController@index');
 

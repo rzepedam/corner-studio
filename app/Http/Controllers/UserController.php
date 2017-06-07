@@ -9,6 +9,9 @@ use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Mail\UpdateProfile;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use CornerStudio\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -17,7 +20,7 @@ class UserController extends Controller
      * @var \Illuminate\Log\Writer
      */
     protected $log;
-    
+
     /**
      * @var \CornerStudio\User
      */
@@ -25,14 +28,15 @@ class UserController extends Controller
 
 
     /**
-     * @param Log $user 
-     * @param User $user 
+     * @param Log $user
+     * @param User $user
      */
     public function __construct(Log $log, User $user)
     {
         $this->log  = $log;
         $this->user = $user;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,7 +62,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
@@ -85,20 +90,51 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\RedirectResponse
      */
-    public function show($id)
+    public function submitImage()
     {
-        //
+        $this->validate(request(), [
+            'x'    => ['required', 'numeric'],
+            'y'    => ['required', 'numeric'],
+            'w'    => ['required', 'numeric'],
+            'h'    => ['required', 'numeric'],
+            'file' => ['required', 'image']
+        ]);
+
+        DB::beginTransaction();
+        try
+        {
+            $name  = time() . '.jpg';
+            $image = Image::make(request()->file('file')->getRealPath())
+                ->orientate()
+                ->crop(ceil(request('w')), ceil(request('h')), ceil(request('x')), ceil(request('y')))
+                ->encode('jpg', 100);
+
+            Storage::put($name, $image);
+
+            $user         = User::findOrFail(auth()->id());
+            $user->avatar = $name;
+            $user->save();
+            DB::commit();
+
+            return redirect()->back();
+        } catch ( \Exception $e )
+        {
+            $this->log->error("Error Store Avatar: " . $e->getMessage());
+            session()->flash('error', 'Ha ocurrido un error. Contacte personal encargado.');
+            DB::rollback();
+
+            return redirect()->back();
+        }
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -120,8 +156,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UserRequest $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, $id)
@@ -148,7 +185,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

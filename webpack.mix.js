@@ -7,6 +7,7 @@ mix
         'resources/assets/custom/css/font-awesome.min.css',
         'resources/assets/inspinia/css/toastr.min.css',
         'node_modules/sweetalert/dist/sweetalert.css',
+        'node_modules/node-waves/dist/waves.min.css',
         'resources/assets/inspinia/css/animate.css',
         'resources/assets/inspinia/css/style.css',
         'resources/assets/custom/css/custom-layout.css'
@@ -14,8 +15,10 @@ mix
 
     // Images to copy
     .copy('resources/assets/inspinia/img/header-profile.png', 'public/css/patterns')
+    .copy('resources/assets/inspinia/img/header-profile-skin-1.png', 'public/css/patterns')
     .copy('resources/assets/custom/img/logo.png', 'public/img')
     .copy('resources/assets/custom/img/logo_full.png', 'public/img')
+    .copy('resources/assets/custom/img/profile.png', 'public/img')
     .copy('resources/assets/inspinia/img/profile_small.jpg', 'public/img')
 
     // Layout JS
@@ -28,7 +31,7 @@ mix
         'resources/assets/inspinia/js/pace.min.js',
         'resources/assets/inspinia/js/toastr.min.js',
         'node_modules/sweetalert/dist/sweetalert.min.js',
-        'resources/assets/custom/js/custom-layout.js'
+        'node_modules/node-waves/dist/waves.min.js'
     ], 'public/js/layout.js')
 
     // Fonts
@@ -139,8 +142,8 @@ mix
             mix.scripts('resources/assets/utilities/valida_email.js', 'public/js/users/create-edit.js');
 
         // Edit
-            mix.combine('node_modules/croppie/croppie.css', 'public/css/users/edit.css')
-                .scripts('node_modules/croppie/croppie.min.js', 'public/js/users/edit.js')
+            mix.combine('node_modules/cropper/dist/cropper.min.css', 'public/css/users/edit.css')
+                .scripts('node_modules/cropper/dist/cropper.min.js', 'public/js/users/edit.js')
 
     // Passport
         mix.copy('resources/assets/passport/app.css', 'public/css/passport.css');

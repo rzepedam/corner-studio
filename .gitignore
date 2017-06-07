@@ -10,3 +10,4 @@
 public/mix-manifest.json
 storage/*.key
 composer.lock
+public/storage

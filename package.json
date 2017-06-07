@@ -22,11 +22,12 @@
     "autonumeric": "^1.9.46",
     "chart.js": "^2.5.0",
     "chosen-js": "^1.7.0",
-    "croppie": "^2.4.1",
+    "cropper": "^3.0.0-rc.2",
     "fullcalendar": "^3.2.0",
     "jquery.rut": "^1.1.2",
     "mdi": "^1.9.33",
     "moment": "^2.18.0",
+    "node-waves": "^0.7.5",
     "sweetalert": "^1.1.3"
   }
 }

@@ -17,7 +17,7 @@
                 <td class="text-center">{{ $user->email }}</td>
                 <td class="text-center">
                     <a href="javascript:void(0)" data-id="{{ $user->id }}" class="btn-delete waves" data-url="{{ Request::path() }}" data-token="{{ csrf_token() }}">
-                        <i class="fa fa-trash text-danger"></i>
+                        <i class="mdi mdi-delete-empty mdi-18px text-danger"></i>
                     </a>
                 </td>
             </tr>

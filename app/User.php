@@ -67,4 +67,14 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->male_surname;
     }
+
+    /**
+     * @param $value 1445453.png
+     *
+     * @return string
+     */
+    public function getAvatarAttribute($value)
+    {
+        return is_null($value) ? 'img/profile.png' : $value;
+    }
 }
