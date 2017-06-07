@@ -75,6 +75,6 @@ class User extends Authenticatable
      */
     public function getAvatarAttribute($value)
     {
-        return is_null($value) ? 'img/profile.png' : $value;
+        return is_null($value) ? 'img/profile.png' : 'storage/' . $value;
     }
 }
