@@ -69,6 +69,7 @@ class UserController extends Controller
     {
         $password = str_random(15);
         $request->request->add(['password' => $password]);
+        $request->request->add(['full_name' => '']);
         DB::beginTransaction();
 
         try
