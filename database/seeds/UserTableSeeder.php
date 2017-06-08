@@ -17,16 +17,18 @@ class UserTableSeeder extends Seeder
         \CornerStudio\User::create([
             'first_name'   => 'Roberto',
             'male_surname' => 'Zepeda',
+            'full_name'    => 'Roberto Zepeda',
             'email'        => 'robertozepeda@controlqtime.cl',
-            'password'     => bcrypt('grupo@lfr@12')
+            'password'     => 'grupo@lfr@12'
         ]);
 
         \CornerStudio\User::create([
             'first_name'   => 'Raúl',
             'male_surname' => 'Meza',
+            'full_name'    => 'Raúl Meza',
             'email'        => 'raulmeza@controlqtime.cl',
             'is_admin'     => 1,
-            'password'     => bcrypt('qwerty')
+            'password'     => 'qwerty'
         ]);
     }
 }

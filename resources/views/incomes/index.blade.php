@@ -2,6 +2,8 @@
 
 @section('title') Ingresos @stop
 
+@section('title-header') Ingresos @stop
+
 @section('content')
 
     <div class="row">

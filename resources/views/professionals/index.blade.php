@@ -2,15 +2,17 @@
 
 @section('title') Profesionales @stop
 
+@section('title-header') Listado Profesionales @stop
+
 @section('content')
 
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <a href="{{ route('professionals.create') }}" class="btn btn-primary">
-                        <i class="mdi mdi-plus-circle"></i> Crear Nuevo Profesional
-                    </a>
+
+                    @include('layouts.pages.search', ['url' => 'professionals'])
+
                 </div>
                 <div class="ibox-content">
 

@@ -26,6 +26,20 @@ class Subscription extends Model
         'end_date', 'deleted_at'
     ];
 
+    /**
+     * @param $query
+     * @param $search
+     */
+    public function scopeName($query, $search)
+    {
+        if ( ! is_null($search) )
+        {
+            $query->whereHas('client', function ($query) use ($search)
+            {
+                $query->where('full_name', "LIKE", "%$search%");
+            });
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

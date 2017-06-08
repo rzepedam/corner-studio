@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'male_surname', 'email', 'is_admin', 'password',
+        'first_name', 'male_surname', 'full_name', 'email', 'is_admin', 'password',
     ];
 
     /**
@@ -27,6 +27,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function scopeName($query, $search)
+    {
+        if ( ! is_null($search) )
+        {
+            $query->where('full_name', "LIKE", "%$search%");
+        }
+    }
 
     /**
      * @param string $value
@@ -44,6 +53,11 @@ class User extends Authenticatable
         $this->attributes['male_surname'] = ucfirst(mb_strtolower($value, 'utf-8'));
     }
 
+    public function setFullNameAttribute()
+    {
+        $this->attributes['full_name'] = $this->first_name . ' ' . $this->male_surname;
+    }
+
     /**
      * @param password $value
      */
@@ -58,14 +72,6 @@ class User extends Authenticatable
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return $this->first_name . ' ' . $this->male_surname;
     }
 
     /**

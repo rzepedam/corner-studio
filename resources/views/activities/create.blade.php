@@ -1,12 +1,12 @@
 @extends('layouts.layout')
 
-@section('title') Crear Nueva Actividad @stop
+@section('title') Crear Actividad @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-activity.css') }}">
-
 @stop
+
+@section('title-header') Crear Nueva Actividad @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('activities.index') }}">Actividades</a></li>

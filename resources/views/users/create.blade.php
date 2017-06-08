@@ -2,7 +2,7 @@
 
 @section('title') Crear Usuario @stop
 
-@section('title-header') Crear Usuario @stop
+@section('title-header') Crear Nuevo Usuario @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('users.index') }}">Usuarios</a></li>

@@ -2,9 +2,11 @@
 
 @section('title') Detalle Cliente @stop
 
+@section('title-header') Detalle Cliente @stop
+
 @section('breadcrumb')
     <li><a href="{{ route('clients.index') }}">Clientes</a></li>
-    <li class="active"><strong>Detalle</strong></li>
+    <li class="active"><strong><span class="text-success">{{ $client->id }}</span></strong></li>
 @stop
 
 @section('content')

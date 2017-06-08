@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ mix('css/create-custom-professional.css') }}">
 @stop
 
+@section('title-header') Editar Profesional @stop
+
 @section('breadcrumb')
     <li><a href="{{ route('professionals.index') }}">Profesionales</a></li>
     <li class="active"><strong>Editar</strong></li>

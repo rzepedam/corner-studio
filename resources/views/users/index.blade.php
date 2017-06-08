@@ -4,10 +4,6 @@
 
 @section('title-header') Listado Usuarios @stop
 
-@section('breadcrumb')
-    <li class="active"><strong>Usuarios</strong></li>
-@stop
-
 @section('content')
 
     @include('layouts.messages.error')
@@ -16,9 +12,9 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">
-                        <i class="fa fa-plus-circle"></i> Crear Nuevo Usuario
-                    </a>
+
+                    @include('layouts.pages.search', ['url' => 'users'])
+
                 </div>
                 <div class="ibox-content">
 

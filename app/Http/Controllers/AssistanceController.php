@@ -5,12 +5,18 @@ namespace CornerStudio\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use CornerStudio\Http\Entities\Client;
+use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Assistance;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AssistanceController extends Controller
 {
+    /**
+     * @var Activity
+     */
+    protected $activity;
+
     /**
      * @var Assistance
      */
@@ -29,12 +35,14 @@ class AssistanceController extends Controller
     /**
      * AssistanceController constructor.
      *
+     * @param Activity $activity
      * @param Assistance $assistance
      * @param Client $client
      * @param Log $log
      */
-    public function __construct(Assistance $assistance, Client $client, Log $log)
+    public function __construct(Activity $activity, Assistance $assistance, Client $client, Log $log)
     {
+        $this->activity   = $activity;
         $this->assistance = $assistance;
         $this->client     = $client;
         $this->log        = $log;
@@ -42,11 +50,14 @@ class AssistanceController extends Controller
 
     public function index()
     {
-        $assistances = $this->assistance->with(['client'])
+        $activities  = $this->activity->pluck('name', 'id');
+        $assistances = $this->assistance
+            ->with(['client'])
+            ->name(request('search'))
             ->orderBy('created_at', 'DESC')
-            ->paginate(10);
+            ->paginate(20);
         
-        return view('assistances.index', compact('assistances'));
+        return view('assistances.index', compact('activities', 'assistances'));
     }
 
     /**

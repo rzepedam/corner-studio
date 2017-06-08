@@ -64,9 +64,11 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = $this->subscription->with(['client', 'payment', 'activities'])
+        $subscriptions = $this->subscription
+            ->with(['client', 'payment', 'activities'])
+            ->name(request('search'))
             ->orderBy('id', 'DESC')
-            ->paginate(25);
+            ->paginate(20);
 
         return view('subscriptions.index', compact('subscriptions'));
     }

@@ -3,11 +3,10 @@
 @section('title') Editar Suscripción @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-subscription.css') }}">
-    <link rel="stylesheet" href="/css/style.css">
-
 @stop
+
+@section('title-header') Editar Suscripción @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('subscriptions.index') }}">Suscripciones</a></li>

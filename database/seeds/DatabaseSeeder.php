@@ -11,16 +11,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CountryTableSeeder::class);
-        $this->call(MaritalStatusTableSeeder::class);
+        if ( getenv('APP_ENV') != 'production' )
+        {
+            $this->call(AddressTableSeeder::class);
+            $this->call(SubscriptionTableSeeder::class);
+            $this->call(ActivityTableSeeder::class);
+            $this->call(AssistanceTableSeeder::class);
+        }
+
         $this->call(RegionTableSeeder::class);
         $this->call(ProvinceTableSeeder::class);
         $this->call(CommuneTableSeeder::class);
-        $this->call(AddressTableSeeder::class);
-        $this->call(PaymentTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
+        $this->call(MaritalStatusTableSeeder::class);
         $this->call(ColorTableSeeder::class);
-        $this->call(SubscriptionTableSeeder::class);
-        $this->call(ActivityTableSeeder::class);
+        $this->call(PaymentTableSeeder::class);
         $this->call(UserTableSeeder::class);
     }
 }

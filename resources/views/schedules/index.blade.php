@@ -3,10 +3,10 @@
 @section('title') Calendario @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/schedules.css') }}">
-
 @stop
+
+@section('title-header') Calendario @stop
 
 @section('content')
 

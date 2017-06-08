@@ -71,7 +71,10 @@ class ProfessionalController extends Controller
      */
     public function index()
     {
-        $professionals = $this->professional->orderBy('id', 'DESC')->paginate(25);
+        $professionals = $this->professional
+            ->name(request('search'))
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
 
         return view('professionals.index', compact('professionals'));
     }

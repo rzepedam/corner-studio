@@ -2,9 +2,11 @@
 
 @section('title') Detalle Actividad @stop
 
+@section('title-header') Detalle Actividad @stop
+
 @section('breadcrumb')
     <li><a href="{{ route('activities.index') }}">Actividades</a></li>
-    <li class="active"><strong>Detalle</strong></li>
+    <li class="active"><strong><span class="text-success">{{ $activity->id }}</span></strong></li>
 @stop
 
 @section('content')

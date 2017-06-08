@@ -26,6 +26,17 @@ class Activity extends Model
         'start_date', 'end_date', 'deleted_at'
     ];
 
+    /**
+     * @param $query
+     * @param $search
+     */
+    public function scopeName($query, $search)
+    {
+        if ( ! is_null($search) )
+        {
+            $query->where('name', "LIKE", "%$search%");
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

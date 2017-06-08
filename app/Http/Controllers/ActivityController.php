@@ -54,9 +54,11 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = $this->activity->with(['professional'])
+        $activities = $this->activity
+            ->with(['professional'])
+            ->name(request('search'))
             ->orderBy('end_date', 'ASC')
-            ->paginate(25);
+            ->paginate(20);
 
         return view('activities.index', compact('activities'));
     }

@@ -1,5 +1,8 @@
 @extends('layouts.layout')
+
 @section('title') Clientes @stop
+
+@section('title-header') Listado Clientes @stop
 
 @section('content')
 
@@ -7,9 +10,9 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <a href="{{ route('clients.create') }}" class="btn btn-primary">
-                        <i class="mdi mdi-plus-circle"></i> Crear Nuevo Cliente
-                    </a>
+
+                    @include('layouts.pages.search', ['url' => 'clients'])
+
                 </div>
                 <div class="ibox-content">
 

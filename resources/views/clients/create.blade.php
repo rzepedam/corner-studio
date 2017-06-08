@@ -1,11 +1,16 @@
 @extends('layouts.layout')
 
-@section('title') Crear Nuevo Cliente @stop
+@section('title') Crear Cliente @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-client.css') }}">
+@stop
 
+@section('title-header') Crear Nuevo Cliente @stop
+
+@section('breadcrumb')
+    <li><a href="{{ route('clients.index') }}">Clientes</a></li>
+    <li class="active"><strong>Nuevo</strong></li>
 @stop
 
 @section('breadcrumb')

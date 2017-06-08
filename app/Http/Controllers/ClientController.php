@@ -79,7 +79,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = $this->client->orderBy('id', 'DESC')->paginate(25);
+        $clients = $this->client
+            ->name(request('search'))
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
 
         return view('clients.index', compact('clients'));
     }

@@ -2,9 +2,11 @@
 
 @section('title') Detalle Suscripción <span class="badge badge-primary">{{ $subscription->state }}</span> @stop
 
+@section('title-header') Detalle Suscripción @stop
+
 @section('breadcrumb')
     <li><a href="{{ route('subscriptions.index') }}">Suscripciones</a></li>
-    <li class="active"><strong>Detalle</strong></li>
+    <li class="active"><strong><span class="text-success">{{ $subscription->id }}</span></strong></li>
 @stop
 
 @section('content')

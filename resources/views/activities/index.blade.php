@@ -1,5 +1,8 @@
 @extends('layouts.layout')
+
 @section('title') Actividades @stop
+
+@section('title-header') Listado Actividades @stop
 
 @section('content')
 
@@ -7,9 +10,9 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <a href="{{ route('activities.create') }}" class="btn btn-primary">
-                        <i class="mdi mdi-plus-circle"></i> Crear Nueva Actividad
-                    </a>
+
+                    @include('layouts.pages.search', ['url' => 'activities'])
+
                 </div>
                 <div class="ibox-content">
 

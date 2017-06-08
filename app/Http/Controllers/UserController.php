@@ -2,18 +2,16 @@
 
 namespace CornerStudio\Http\Controllers;
 
-use CornerStudio\Http\Requests\AvatarProfileRequest;
 use CornerStudio\User;
-use Illuminate\Http\Request;
 use CornerStudio\Mail\SignUp;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Mail\UpdateProfile;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use CornerStudio\Http\Requests\UserRequest;
+use CornerStudio\Http\Requests\AvatarProfileRequest;
 
 class UserController extends Controller
 {
@@ -29,7 +27,7 @@ class UserController extends Controller
 
 
     /**
-     * @param Log $user
+     * @param Log $log
      * @param User $user
      */
     public function __construct(Log $log, User $user)
@@ -45,7 +43,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->paginate();
+        $users = $this->user->name(request('search'))->paginate();
 
         return view('users.index', compact('users'));
     }

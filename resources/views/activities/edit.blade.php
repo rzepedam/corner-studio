@@ -3,10 +3,10 @@
 @section('title') Editar Actividad @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-activity.css') }}">
-
 @stop
+
+@section('title-header') Editar Actividad @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('activities.index') }}">Actividades</a></li>

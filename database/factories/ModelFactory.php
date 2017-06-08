@@ -1,17 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
 $factory->define(CornerStudio\Http\Entities\Activity::class, function (Faker\Generator $faker)
@@ -45,6 +33,19 @@ $factory->define(CornerStudio\Http\Entities\Address::class, function (Faker\Gene
         'block'            => '',
         'phone1'           => $faker->e164PhoneNumber,
         'phone2'           => $faker->e164PhoneNumber
+    ];
+});
+
+$factory->define(CornerStudio\Http\Entities\Assistance::class, function (Faker\Generator $faker)
+{
+    $clients    = \CornerStudio\Http\Entities\Client::all();
+    $client     = $clients->random();
+    $assistance = mt_rand(Carbon::parse('-1 month')->timestamp, Carbon::now()->timestamp);
+
+    return [
+        'client_id'  => $client->id,
+        'rut'        => $client->getOriginal('rut'),
+        'created_at' => Carbon::createFromFormat('U', $assistance)
     ];
 });
 

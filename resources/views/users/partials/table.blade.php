@@ -13,7 +13,7 @@
         @foreach($users as $user)
             <tr>
                 <td>{{ $i + 1 }}</td>
-                <td>{{ $user->name }}</td>
+                <td>{{ $user->full_name }}</td>
                 <td class="text-center">{{ $user->email }}</td>
                 <td class="text-center">
                     <a href="javascript:void(0)" data-id="{{ $user->id }}" class="btn-delete waves" data-url="{{ Request::path() }}" data-token="{{ csrf_token() }}">

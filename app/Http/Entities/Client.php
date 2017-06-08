@@ -27,6 +27,17 @@ class Client extends Model
         'birthday', 'deleted_at'
     ];
 
+    /**
+     * @param $query
+     * @param $search
+     */
+    public function scopeName($query, $search)
+    {
+        if ( ! is_null($search) )
+        {
+            $query->where('full_name', "LIKE", "%$search%");
+        }
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

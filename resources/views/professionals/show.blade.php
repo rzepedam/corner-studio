@@ -2,9 +2,11 @@
 
 @section('title') Detalle Profesional @stop
 
+@section('title-header') Detalle Profesional @stop
+
 @section('breadcrumb')
     <li><a href="{{ route('professionals.index') }}">Profesionales</a></li>
-    <li class="active"><strong>Detalle</strong></li>
+    <li class="active"><strong><span class="text-success">{{ $professional->id }}</span></strong></li>
 @stop
 
 @section('content')

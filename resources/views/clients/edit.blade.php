@@ -3,10 +3,10 @@
 @section('title') Editar Cliente @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-client.css') }}">
-
 @stop
+
+@section('title-header') Editar Cliente @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('clients.index') }}">Clientes</a></li>

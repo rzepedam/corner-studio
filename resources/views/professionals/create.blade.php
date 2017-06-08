@@ -1,12 +1,12 @@
 @extends('layouts.layout')
 
-@section('title') Crear Nuevo Profesional @stop
+@section('title') Crear Profesional @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-professional.css') }}">
-
 @stop
+
+@section('title-header') Crear Nuevo Profesional @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('professionals.index') }}">Profesionales</a></li>

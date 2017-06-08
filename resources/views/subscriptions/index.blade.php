@@ -1,5 +1,8 @@
 @extends('layouts.layout')
+
 @section('title') Suscripciones @stop
+
+@section('title-header') Listado Suscripciones @stop
 
 @section('content')
 
@@ -7,9 +10,9 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <a href="{{ route('subscriptions.create') }}" class="btn btn-primary">
-                        <i class="mdi mdi-plus-circle"></i> Crear Nueva Suscripción
-                    </a>
+
+                    @include('layouts.pages.search', ['url' => 'subscriptions'])
+
                 </div>
                 <div class="ibox-content">
 

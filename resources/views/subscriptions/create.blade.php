@@ -1,12 +1,12 @@
 @extends('layouts.layout')
 
-@section('title') Crear Nueva Suscripción @stop
+@section('title') Crear Suscripción @stop
 
 @section('css')
-
     <link rel="stylesheet" href="{{ mix('css/create-custom-subscription.css') }}">
-
 @stop
+
+@section('title-header') Crear Nueva Suscripción @stop
 
 @section('breadcrumb')
     <li><a href="{{ route('subscriptions.index') }}">Suscripciones</a></li>
@@ -54,7 +54,6 @@
 
     <script type="text/javascript" src="{{ mix('js/create-edit-common.js') }}"></script>
     <script type="text/javascript" src="{{ mix('js/create-custom-subscription.js') }}"></script>
-
     <script type="text/javascript">
         $(document).ready(function() {
             var config = {
@@ -64,6 +63,7 @@
                 '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
                 '.chosen-select-width'     : {width:"95%"}
             }
+
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
