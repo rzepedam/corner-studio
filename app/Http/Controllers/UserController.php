@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->name(request('search'))->paginate();
+        $users = $this->user->name(request('search'))->paginate(20);
 
         return view('users.index', compact('users'));
     }

@@ -27,6 +27,7 @@ class Client extends Model
         'birthday', 'deleted_at'
     ];
 
+
     /**
      * @param $query
      * @param $search
@@ -38,6 +39,7 @@ class Client extends Model
             $query->where('full_name', "LIKE", "%$search%");
         }
     }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

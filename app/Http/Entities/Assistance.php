@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assistance extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'rut', 'created_at'
+        'activity_id', 'rut', 'created_at'
     ];
 
     /**
@@ -39,6 +42,21 @@ class Assistance extends Model
     }
 
     /**
+     * @param $query
+     * @param $activity
+     */
+    public function scopeActivity($query, $activity)
+    {
+        if ( ! is_null($activity) )
+        {
+            $query->whereHas('client.subscriptions.activities', function ($query) use ($activity)
+            {
+                $query->where('activity_id', $activity);
+            });
+        }
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client()
@@ -46,6 +64,13 @@ class Assistance extends Model
         return $this->belongsTo(Client::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
 
     /**
      * @return mixed '23-09-2001'

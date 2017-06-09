@@ -4,6 +4,7 @@ namespace CornerStudio\Http\Controllers;
 
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Log\Writer as Log;
 use Illuminate\Support\Facades\DB;
 use CornerStudio\Http\Entities\Activity;
@@ -64,7 +65,7 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         $start = Carbon::createFromFormat('Y-m-d H:i', request('start'));
         $end   = Carbon::createFromFormat('Y-m-d H:i', request('end'));
@@ -74,7 +75,7 @@ class ScheduleController extends Controller
         {
             $activity = $this->activity->findOrFail(request('activity_id'));
 
-            if ( $start < $activity->getOriginal('start_date') || $end > $activity->getOriginal('end_date') )
+            if ( $start < Carbon::parse($activity->getOriginal('start_date')) || $end > Carbon::parse($activity->getOriginal('end_date')) )
             {
                 return response()->json([
                     'status' => false,

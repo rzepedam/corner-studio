@@ -62,6 +62,14 @@ class Activity extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function assistances()
+    {
+        return $this->hasMany(Assistance::class);
+    }
+
 
     /**
      * @param string $value

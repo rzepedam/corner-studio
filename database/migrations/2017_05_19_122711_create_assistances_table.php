@@ -16,6 +16,7 @@ class CreateAssistancesTable extends Migration
         Schema::create('assistances', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('client_id');
+            $table->unsignedInteger('activity_id')->nullable();
             $table->string('rut');
             $table->timestamp('created_at');
         });
