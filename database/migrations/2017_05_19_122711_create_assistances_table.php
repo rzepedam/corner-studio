@@ -18,7 +18,7 @@ class CreateAssistancesTable extends Migration
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('activity_id')->nullable();
             $table->string('rut');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();;
         });
     }
 

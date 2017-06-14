@@ -9,8 +9,10 @@ use CornerStudio\Http\Entities\Client;
 use CornerStudio\Http\Entities\Activity;
 use CornerStudio\Http\Entities\Schedule;
 use CornerStudio\Http\Entities\Assistance;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Yajra\Datatables\Datatables;
 
 class AssistanceController extends Controller
 {
@@ -57,17 +59,39 @@ class AssistanceController extends Controller
         $this->schedule   = $schedule;
     }
 
+    public function getAssistances()
+    {
+        $id = request('id');
+        if (! isset($id) || $id === '*')
+        {
+            $assistances = $this->assistance
+                ->with(['client', 'activity'])
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        } elseif ( $id === '-' )
+        {
+            $assistances = $this->assistance
+                ->with(['client', 'activity'])
+                ->whereNull('activity_id')
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        } else
+        {
+            $assistances = $this->assistance
+                ->with(['client', 'activity'])
+                ->where('activity_id', $id)
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        }
+
+        return Datatables::of($assistances)->make(true);
+    }
+
     public function index()
     {
         $activities  = $this->activity->pluck('name', 'id');
-        $assistances = $this->assistance
-            ->with(['client'])
-            ->name(request('search'))
-            ->activity(request('activity'))
-            ->orderBy('created_at', 'DESC')
-            ->paginate(20);
 
-        return view('assistances.index', compact('activities', 'assistances'));
+        return view('assistances.index', compact('activities'));
     }
 
     /**
@@ -94,7 +118,7 @@ class AssistanceController extends Controller
                 ->pluck('schedules')
                 ->collapse();
 
-            // Actividades que se realizan en momento de la marca +30 min.
+            // Actividades que se realizan en momento de la marca +15 min.
             $mark       = Carbon::parse($request->get('created_at'));
             $limit      = Carbon::parse($mark)->addMinutes(15);
             $activities = $this->schedule->whereBetween('start', [$mark, $limit])->get();

@@ -14,7 +14,9 @@ Route::group(['middleware' => 'auth'], function ()
     });
     Route::resource('clients', 'ClientController');
     Route::resource('professionals', 'ProfessionalController');
+    Route::get('/getAssistances', 'AssistanceController@getAssistances');
     Route::get('/assistances', 'AssistanceController@index');
+    Route::get('/assistances/activities', 'AssistanceController@getAssistanceWithFilterActivity');
     Route::resource('activities', 'ActivityController');
     Route::resource('subscriptions', 'SubscriptionController');
     Route::resource('schedules', 'ScheduleController');

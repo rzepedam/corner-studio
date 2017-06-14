@@ -71,7 +71,7 @@ class Subscription extends Model
      */
     public function setEndDateAttribute($value)
     {
-        $this->attributes['end_date'] = Carbon::createFromFormat('d-m-Y', $value);
+        $this->attributes['end_date'] = Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
     }
 
     /**

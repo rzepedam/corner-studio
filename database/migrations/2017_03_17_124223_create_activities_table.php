@@ -22,6 +22,7 @@ class CreateActivitiesTable extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('color');
+            $table->boolean('is_active')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

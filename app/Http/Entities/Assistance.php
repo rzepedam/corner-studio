@@ -47,6 +47,7 @@ class Assistance extends Model
      */
     public function scopeActivity($query, $activity)
     {
+        dd($activity);
         if ( ! is_null($activity) )
         {
             $query->whereHas('client.subscriptions.activities', function ($query) use ($activity)
@@ -85,6 +86,6 @@ class Assistance extends Model
      */
     public function getHourAttribute()
     {
-        return $this->created_at->format('h:i:s');
+        return $this->created_at->format('H:i:s');
     }
 }

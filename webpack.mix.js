@@ -39,6 +39,7 @@ mix
     // Fonts
         .copy('node_modules/mdi/fonts', 'public/fonts')
         .copy('resources/assets/custom/fonts', 'public/fonts')
+        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2', 'public/fonts')
 
     // Login
         .combine([
@@ -92,6 +93,14 @@ mix
                 'resources/assets/inspinia/js/bootstrap-datepicker.es.min.js',
                 'resources/assets/corner-studio/utilities/config-datepicker.js'
             ], 'public/js/create-custom-professional.js')
+
+    // Assistances
+        // Index
+            .combine('resources/assets/custom/css/dataTables.min.css', 'public/css/assistances/index.css')
+            .scripts([
+                'node_modules/moment/moment.js',
+                'resources/assets/custom/js/dataTables.min.js',
+            ], 'public/js/assistances/index.js')
 
     // Activities
         // Create Edit

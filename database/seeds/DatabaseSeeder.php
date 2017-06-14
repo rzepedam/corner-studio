@@ -11,14 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if ( getenv('APP_ENV') != 'production' )
-        {
-            $this->call(AddressTableSeeder::class);
-            $this->call(SubscriptionTableSeeder::class);
-            $this->call(ActivityTableSeeder::class);
-            $this->call(AssistanceTableSeeder::class);
-        }
-
         $this->call(RegionTableSeeder::class);
         $this->call(ProvinceTableSeeder::class);
         $this->call(CommuneTableSeeder::class);
@@ -27,5 +19,13 @@ class DatabaseSeeder extends Seeder
         $this->call(ColorTableSeeder::class);
         $this->call(PaymentTableSeeder::class);
         $this->call(UserTableSeeder::class);
+
+        if ( getenv('APP_ENV') != 'production' )
+        {
+            $this->call(AddressTableSeeder::class);
+            $this->call(SubscriptionTableSeeder::class);
+            $this->call(ActivityTableSeeder::class);
+            $this->call(AssistanceTableSeeder::class);
+        }
     }
 }
