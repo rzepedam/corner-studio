@@ -100,7 +100,7 @@ mix
             .scripts([
                 'node_modules/moment/moment.js',
                 'node_modules/moment/locale/es.js',
-                'resources/assets/custom/js/dataTables.min.js',
+                'resources/assets/custom/js/datatables.min.js',
             ], 'public/js/assistances/index.js')
 
     // Activities
