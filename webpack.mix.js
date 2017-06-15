@@ -96,7 +96,10 @@ mix
 
     // Assistances
         // Index
-            .combine('resources/assets/custom/css/dataTables.min.css', 'public/css/assistances/index.css')
+            .combine([
+                'resources/assets/custom/css/dataTables.min.css',
+                'resources/assets/custom/css/datatables-custom.css'
+            ], 'public/css/assistances/index.css')
             .scripts([
                 'node_modules/moment/moment.js',
                 'node_modules/moment/locale/es.js',

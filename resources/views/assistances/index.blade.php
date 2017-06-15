@@ -4,15 +4,6 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ mix('css/assistances/index.css') }}">
-    <style>
-        .dataTable {
-            padding-top: 10px !important;
-            padding-bottom: 40px !important;
-        }
-        .dataTables_info {
-            float: left !important;
-        }
-    </style>
 @endsection
 
 @section('title-header') Registro Asistencia @stop
