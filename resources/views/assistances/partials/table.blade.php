@@ -5,8 +5,6 @@
                 <th>Cliente</th>
                 <th class="text-center">Actividad</th>
                 <th class="text-center">Fecha</th>
-                <th class="text-center">Hora</th>
-                <th class="text-center">created_at</th>
             </tr>
         </thead>
     </table>

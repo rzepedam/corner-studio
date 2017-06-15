@@ -4,6 +4,15 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ mix('css/assistances/index.css') }}">
+    <style>
+        .dataTable {
+            padding-top: 10px !important;
+            padding-bottom: 40px !important;
+        }
+        .dataTables_info {
+            float: left !important;
+        }
+    </style>
 @endsection
 
 @section('title-header') Registro Asistencia @stop
@@ -18,10 +27,14 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="row">
-                <div class="col-sm-3">
-                    {{ Form::select('activity', ['*' => '-- Todas --', '-' => '-- No Tiene --'] + $activities->toArray(), null, ['class' => 'form-control', 'id' => 'activity']) }}
-                </div>
+            <div class="col-sm-3" style="padding-left: 0;">
+                {{ Form::select('activity', ['*' => '-- Todas --', '-' => '-- No Tiene --'] + $activities->toArray(), null, ['class' => 'form-control', 'id' => 'activity']) }}
+            </div>
+            <div class="col-sm-6 col-md-4 input-group pull-right">
+                {{ Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Search...', 'id' => 'search']) }}
+                <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary"><i class="mdi mdi-magnify"></i></button>
+                    </span>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -44,16 +57,28 @@
                 "serverSide": true,
                 "destroy": true,
                 "responsive": true,
+                "pageLength": 25,
+                "sDom": '<"top"l>t<"F"ip><"clear"><"clear">',
                 "ajax": {
                     url: "/getAssistances",
                 },
-                "order": [[ 4, 'desc' ]],
+                "language": {
+                    "sProcessing": '<i class="fa fa-spinner fa-pulse fa-3x fa-fw text-success"></i>',
+                    "sInfo": 'Mostrando <span class="text-success">_START_</span> a <span class="text-success">_END_</span> de _TOTAL_ registros',
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "oPaginate": {
+                        "sNext": '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                        "sPrevious": '<i class="fa fa-angle-left" aria-hidden="true"></i>'
+                    },
+                },
+                "order": [[2, 'desc']],
                 "columns": [
-                    {data: 'client.full_name', name: 'client_id'},
+                    {data: 'client.full_name', name: 'client.full_name'},
                     {
-                        data: 'activity.name', name: 'activity', className: 'text-center',
+                        data: 'activity.name', name: 'activity.name', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            if (! row.activity_id) {
+                            if (!row.activity_id) {
                                 return '<span class="badge badge-danger"><span style="color: #FFFFFF">No tiene</span></span>';
                             }
                             return '<span class="badge" style="background:' + row.activity.color + '">' +
@@ -61,30 +86,26 @@
                         }
                     },
                     {
-                        data: 'created_at', name: 'date', className: 'text-center',
+                        data: 'created_at', name: 'created_at', className: 'text-center', searchable: false,
                         'render': function (data, type, row, meta) {
-                            return moment(data).format('DD-MM-YYYY');
+                            return moment(data).format('DD MMM HH:mm:ss');
                         }
                     },
-                    {
-                        data: 'created_at', name: 'hour', className: 'text-center',
-                        'render': function (data, type, row, meta) {
-                            return moment(data).format('HH:mm:ss');
-                        }
-                    },
-                    {data: 'created_at', name: 'created_at', visible: false}
                 ]
             }
 
-            var table = $('#assistances')
-                .on('preXhr.dt', function (e, settings, data) {
-                    data.id = $('#activity').val()
-                })
-                .DataTable(params);
+            var table = $('#assistances').on('preXhr.dt', function (e, settings, data) {
+                data.id = $('#activity').val();
+            }).DataTable(params);
 
             $('#activity').on('change', function () {
                 table.ajax.reload();
             });
+
+            $('#search').keyup(function () {
+                table.search($(this).val()).draw();
+            })
+
         });
     </script>
 @stop
