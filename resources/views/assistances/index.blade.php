@@ -85,14 +85,17 @@
                 ]
             }
 
+            // Send new parameter to server
             var table = $('#assistances').on('preXhr.dt', function (e, settings, data) {
                 data.id = $('#activity').val();
             }).DataTable(params);
 
+            // reolad table to the change activity select
             $('#activity').on('change', function () {
                 table.ajax.reload();
             });
 
+            // Search method  
             $('#search').keyup(function () {
                 table.search($(this).val()).draw();
             })
