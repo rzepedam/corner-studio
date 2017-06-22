@@ -56,6 +56,8 @@
                 "language": {
                     "sProcessing": '<i class="fa fa-spinner fa-pulse fa-3x fa-fw text-success"></i>',
                     "sInfo": 'Mostrando <span class="text-success">_START_</span> a <span class="text-success">_END_</span> de _TOTAL_ registros',
+                    "sInfoEmpty": "No existen coincidencias",
+                    "sInfoFiltered": '(filtrado de un total de <span class="text-primary">_MAX_</span> registros)',
                     "sLengthMenu": "Mostrar _MENU_ registros",
                     "sZeroRecords": "No se encontraron resultados",
                     "oPaginate": {
