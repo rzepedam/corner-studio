@@ -5,6 +5,7 @@ namespace CornerStudio\Providers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale(config('app.locale'));
-        // DB::statement("SET lc_time_names = 'es_ES'");
+        Schema::defaultStringLength(191); //Solved by increasing StringLength
     }
 
     /**
