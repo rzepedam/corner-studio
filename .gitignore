@@ -8,5 +8,8 @@
 /public/js
 .DS_Store
 public/mix-manifest.json
+storage/debugbar
+storage/framework
+storage/logs
 storage/oauth-private.key
 storage/oauth-public.key
