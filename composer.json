@@ -14,7 +14,8 @@
         "laravel/passport": "^2.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.2.0",
-        "yajra/laravel-datatables-oracle": "^7.0"
+        "yajra/laravel-datatables-oracle": "^7.0",
+        "aws/aws-sdk-php-laravel": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

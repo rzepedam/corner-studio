@@ -186,6 +186,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class
     ],
 
     /*
@@ -243,5 +244,6 @@ return [
         'Date'         => Jenssegers\Date\Date::class,
         'Image'        => Intervention\Image\Facades\Image::class,
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'AWS' => Aws\Laravel\AwsFacade::class
     ],
 ];
